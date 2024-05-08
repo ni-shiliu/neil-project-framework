@@ -19,6 +19,7 @@
   <properties>
     <neil.project.share.version>1.0.0-SNAPSHOT</neil.project.share.version>
     <spring-cloud-starter-openfeign.version>2.2.9.RELEASE</spring-cloud-starter-openfeign.version>
+    <hutool-all.version>5.7.13</hutool-all.version>
   </properties>
 
   <dependencyManagement>
@@ -33,6 +34,12 @@
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-openfeign-core</artifactId>
         <version>${spring-cloud-starter-openfeign.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool-all.version}</version>
       </dependency>
 
     </dependencies>
@@ -65,5 +72,9 @@
       <artifactId>lombok</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+    </dependency>
   </dependencies>
 </project>
