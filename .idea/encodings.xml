@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/neil-project-bff/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-bff/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-dependencies/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-dependencies/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-dependenices/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-dependenices/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/neil-project-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/order-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/order-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/order-infrastructure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/order-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/order-start/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-pc-bff/pc-bff-adapter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-pc-bff/pc-bff-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-pc-bff/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-pc-bff/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-share/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neil-project-share/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/adapter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/pc-bff-adapter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/pc-bff-adapter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/pc-bff-start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/pc-bff-start/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/start/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/neill-project-pc-bff/start/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="order-start" />
+        <module name="pc-bff-start" />
+        <module name="pc-bff-adapter" />
+        <module name="order-client" />
+        <module name="order-app" />
+        <module name="order-infrastructure" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="adapter" target="1.8" />
+      <module name="neil-project-app" target="1.8" />
+      <module name="neil-project-bff" target="1.8" />
+      <module name="neil-project-dependenices" target="1.8" />
+      <module name="neill-project-pc-bff" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="adapter" options="-parameters" />
+      <module name="neil-project-app" options="-parameters" />
+      <module name="neil-project-order" options="" />
+      <module name="neil-project-pc-bff" options="" />
+      <module name="neill-project-pc-bff" options="-parameters" />
+      <module name="order-app" options="-parameters" />
+      <module name="order-client" options="-parameters" />
+      <module name="order-infrastructure" options="-parameters" />
+      <module name="order-start" options="-parameters" />
+      <module name="pc-bff-adapter" options="-parameters" />
+      <module name="pc-bff-start" options="-parameters" />
+    </option>
+  </component>
+</project>
