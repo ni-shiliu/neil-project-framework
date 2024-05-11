@@ -8,7 +8,7 @@
 
 **统一管理应用依赖（公用依赖需谨慎添加）**
 
-使用标签 `<optional>true</optional>`可让自应用选择性添加对应依赖。
+使用标签 `<optional>true</optional>`可让子应用选择性添加对应依赖。
 
 ```xml
     <dependency>
