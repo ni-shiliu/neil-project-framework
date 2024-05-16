@@ -4,14 +4,14 @@
 
   <parent>
     <groupId>com.neil.project</groupId>
-    <artifactId>neil-project-dependencies</artifactId>
+    <artifactId>neil-project-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
   <groupId>com.neil.project</groupId>
   <artifactId>neil-project-share</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <name>neil-project-share</name>
   <url>http://maven.apache.org</url>

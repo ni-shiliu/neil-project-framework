@@ -4,7 +4,7 @@
 
 ![img.png](img.png)
 
-### neil-project-dependencies
+### neil-project-parent
 
 **统一管理应用依赖（公用依赖需谨慎添加）**
 

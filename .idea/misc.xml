@@ -13,11 +13,15 @@
         <option value="$PROJECT_DIR$/neill-project-pc-bff/pc-bff-adapter/pom.xml" />
         <option value="$PROJECT_DIR$/neil-project-pc-bff/pom.xml" />
         <option value="$PROJECT_DIR$/neil-project-order/order-app/pom.xml" />
+        <option value="$PROJECT_DIR$/neil-project-parent/neil-project-parent-middleware/pom.xml" />
+        <option value="$PROJECT_DIR$/neil-project-parent/neil-project-parent-share/pom.xml" />
+        <option value="$PROJECT_DIR$/neil-project-parent/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/neil-project-bff/pom.xml" />
+        <option value="$PROJECT_DIR$/neil-project-dependencies/pom.xml" />
         <option value="$PROJECT_DIR$/neil-project-dependenices/pom.xml" />
         <option value="$PROJECT_DIR$/neil-project-order/neil-project-app/pom.xml" />
         <option value="$PROJECT_DIR$/neill-project-pc-bff/adapter/pom.xml" />

@@ -10,11 +10,9 @@
   </parent>
 
   <groupId>com.neil.project</groupId>
-  <artifactId>neil-project-dependencies</artifactId>
+  <artifactId>neil-project-parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-
-  <name>neil-project-dependencies</name>
 
   <properties>
     <neil.project.share.version>1.0.0-SNAPSHOT</neil.project.share.version>

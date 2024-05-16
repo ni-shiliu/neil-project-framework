@@ -7,19 +7,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="order-start" />
         <module name="pc-bff-start" />
-        <module name="pc-bff-adapter" />
+        <module name="neil-project-share" />
         <module name="order-client" />
         <module name="order-app" />
         <module name="order-infrastructure" />
+        <module name="order-start" />
+        <module name="pc-bff-adapter" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="adapter" target="1.8" />
       <module name="neil-project-app" target="1.8" />
       <module name="neil-project-bff" target="1.8" />
+      <module name="neil-project-dependencies" target="1.8" />
       <module name="neil-project-dependenices" target="1.8" />
+      <module name="neil-project-parent-middleware" target="1.8" />
+      <module name="neil-project-parent-share" target="1.8" />
       <module name="neill-project-pc-bff" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -28,7 +32,10 @@
       <module name="adapter" options="-parameters" />
       <module name="neil-project-app" options="-parameters" />
       <module name="neil-project-order" options="" />
+      <module name="neil-project-parent-middleware" options="-parameters" />
+      <module name="neil-project-parent-share" options="-parameters" />
       <module name="neil-project-pc-bff" options="" />
+      <module name="neil-project-share" options="-parameters" />
       <module name="neill-project-pc-bff" options="-parameters" />
       <module name="order-app" options="-parameters" />
       <module name="order-client" options="-parameters" />
