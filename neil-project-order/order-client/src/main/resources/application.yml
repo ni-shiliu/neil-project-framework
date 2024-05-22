@@ -5,3 +5,7 @@ spring:
     name: neil-project-order
   profiles:
     active: test
+
+feign:
+  hystrix:
+    enabled: true

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author nihao
  * @date 2024/5/6
  */
-@Api("订单模块")
+@Api(tags = "订单模块")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/pc/order/")
