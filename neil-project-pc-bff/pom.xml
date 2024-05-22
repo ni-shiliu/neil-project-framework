@@ -2,13 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.example</groupId>
+  <groupId>com.neil.project</groupId>
   <artifactId>neil-project-pc-bff</artifactId>
   <packaging>pom</packaging>
   <name>neil-project-pc-bff</name>
 
   <modules>
-    <module>pc-bff-start</module>
     <module>pc-bff-adapter</module>
   </modules>
 

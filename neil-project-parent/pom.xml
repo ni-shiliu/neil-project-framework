@@ -18,6 +18,7 @@
     <neil.project.share.version>1.0.0-SNAPSHOT</neil.project.share.version>
     <spring-cloud-starter-openfeign.version>2.2.9.RELEASE</spring-cloud-starter-openfeign.version>
     <hutool-all.version>5.7.13</hutool-all.version>
+    <knife4j-spring-boot-starter.version>4.4.0</knife4j-spring-boot-starter.version>
   </properties>
 
   <dependencyManagement>
@@ -38,6 +39,12 @@
         <groupId>cn.hutool</groupId>
         <artifactId>hutool-all</artifactId>
         <version>${hutool-all.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.xiaoymin</groupId>
+        <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+        <version>${knife4j-spring-boot-starter.version}</version>
       </dependency>
 
     </dependencies>
@@ -73,6 +80,11 @@
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
     </dependency>
   </dependencies>
 </project>

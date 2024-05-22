@@ -13,7 +13,6 @@
   </parent>
 
   <modules>
-    <module>order-start</module>
     <module>order-client</module>
     <module>order-app</module>
     <module>order-infrastructure</module>
