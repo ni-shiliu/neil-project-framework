@@ -21,6 +21,7 @@
     <knife4j-spring-boot-starter.version>4.4.0</knife4j-spring-boot-starter.version>
     <spring-cloud.version>2020.0.4</spring-cloud.version>
     <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
+    <guava.version>31.0.1-jre</guava.version>
   </properties>
 
   <dependencyManagement>
@@ -69,6 +70,12 @@
         <version>${mybatis-plus-boot-starter.version}</version>
       </dependency>
 
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -113,5 +120,11 @@
       <groupId>com.github.xiaoymin</groupId>
       <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+
   </dependencies>
 </project>

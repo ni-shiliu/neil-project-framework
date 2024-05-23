@@ -1,15 +1,16 @@
 package com.neil.project.adapter.controller;
 
+import com.google.common.collect.Lists;
 import com.neil.project.common.BaseResult;
 import com.neil.project.order.dto.OrderDTO;
+import com.neil.project.order.dto.OrderQueryDTO;
 import com.neil.project.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author nihao
@@ -28,6 +29,13 @@ public class OrderController {
     public BaseResult<OrderDTO> getByOrderNo(@RequestParam("orderNo") String orderNo) {
         OrderDTO orderDTO = orderService.getByOrderNo(orderNo);
         return BaseResult.success(orderDTO);
+    }
+
+    @ApiOperation("订单列表")
+    @PostMapping("list")
+    public BaseResult<List<OrderDTO>> getByOrderNo(@RequestBody OrderQueryDTO orderQueryDTO) {
+        OrderDTO orderDTO = orderService.getByOrderNo(orderQueryDTO.getOrderNo());
+        return BaseResult.success(Lists.newArrayList(orderDTO));
     }
 
 }
