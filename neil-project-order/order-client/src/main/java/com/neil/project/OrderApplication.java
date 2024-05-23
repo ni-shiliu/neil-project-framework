@@ -11,10 +11,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableFeignClients(basePackages = {"com.neil.project.user"})
-public class StartApplication {
+public class OrderApplication {
 
     public static void main( String[] args ) {
-        SpringApplication.run(StartApplication.class, args);
+        SpringApplication.run(OrderApplication.class, args);
     }
 
 }

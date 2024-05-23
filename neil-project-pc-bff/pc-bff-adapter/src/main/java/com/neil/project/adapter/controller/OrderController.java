@@ -33,9 +33,9 @@ public class OrderController {
 
     @ApiOperation("订单列表")
     @PostMapping("list")
-    public BaseResult<List<OrderDTO>> getByOrderNo(@RequestBody OrderQueryDTO orderQueryDTO) {
-        OrderDTO orderDTO = orderService.getByOrderNo(orderQueryDTO.getOrderNo());
-        return BaseResult.success(Lists.newArrayList(orderDTO));
+    public BaseResult<List<OrderDTO>> list(@RequestBody OrderQueryDTO orderQueryDTO) {
+        List<OrderDTO> orderDTOList = orderService.list(orderQueryDTO);
+        return BaseResult.success(orderDTOList);
     }
 
 }

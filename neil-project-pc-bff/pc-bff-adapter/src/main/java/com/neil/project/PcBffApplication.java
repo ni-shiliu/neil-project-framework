@@ -11,10 +11,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 @SpringBootApplication
 @EnableFeignClients(basePackages = {"com.neil.project.order"})
-public class StartApplication {
+public class PcBffApplication {
 
     public static void main( String[] args ) {
-        SpringApplication.run(StartApplication.class, args);
+        SpringApplication.run(PcBffApplication.class, args);
     }
 
 }

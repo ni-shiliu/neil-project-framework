@@ -5,6 +5,3 @@ spring:
     name: neil-project-pc-bff
   profiles:
     active: test
-feign:
-  hystrix:
-    enabled: true
