@@ -36,7 +36,7 @@
 
 这样的架构是将整个应用的**BFF**统一处理，当然也可以将每一个微服务构建一个**BFF**，例如：**order-bff**，**pay-bff**。
 
-该应用包含两个模块：
+该应用包含一个模块：
 1. pc-adapter：展示层模块，即**MVC**中的Controller，该模块调用微服务中的**client**模块。
 
 
@@ -44,7 +44,7 @@
 
 **order服务**
 
-该应用包含四个模块：
+该应用包含三个模块：
 1. order-client：对外api层
 2. order-app：业务处理层，包含**service**、**schedule**、**message**
 3. order-infra：基础设施层，包含**config**、**mapper**、**gateway**
