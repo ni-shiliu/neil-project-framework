@@ -7,11 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="neil-myth-spring-boot-starter" />
         <module name="neil-project-share" />
+        <module name="neil-myth-common" />
         <module name="order-client" />
         <module name="order-app" />
         <module name="order-infrastructure" />
         <module name="pc-bff-adapter" />
+        <module name="neil-myth-core" />
+        <module name="neil-myth-annotation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +34,10 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="adapter" options="-parameters" />
+      <module name="neil-myth-annotation" options="-parameters" />
+      <module name="neil-myth-common" options="-parameters" />
+      <module name="neil-myth-core" options="-parameters" />
+      <module name="neil-myth-spring-boot-starter" options="-parameters" />
       <module name="neil-project-app" options="-parameters" />
       <module name="neil-project-order" options="" />
       <module name="neil-project-parent-middleware" options="-parameters" />
