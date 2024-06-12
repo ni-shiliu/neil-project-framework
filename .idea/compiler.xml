@@ -13,6 +13,7 @@
         <module name="order-client" />
         <module name="order-app" />
         <module name="order-infrastructure" />
+        <module name="neil-myth-mq" />
         <module name="pc-bff-adapter" />
         <module name="neil-myth-core" />
         <module name="neil-myth-annotation" />
@@ -37,6 +38,7 @@
       <module name="neil-myth-annotation" options="-parameters" />
       <module name="neil-myth-common" options="-parameters" />
       <module name="neil-myth-core" options="-parameters" />
+      <module name="neil-myth-mq" options="-parameters" />
       <module name="neil-myth-spring-boot-starter" options="-parameters" />
       <module name="neil-project-app" options="-parameters" />
       <module name="neil-project-order" options="" />

@@ -24,4 +24,10 @@ public class MythConfig {
 
     private MythDbConfig mythDbConfig;
 
+    private int bufferSize = 4096;
+
+    private int retryMax = 3;
+
+    private int consumerThreads = Runtime.getRuntime().availableProcessors() << 1;
+
 }

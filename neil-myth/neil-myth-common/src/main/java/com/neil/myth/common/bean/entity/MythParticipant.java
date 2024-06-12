@@ -13,11 +13,9 @@ public class MythParticipant implements Serializable {
 
     private static final long serialVersionUID = -210590704127687690L;
 
-    private Class targetClass;
+    private String transId;
 
-    private String methodName;
+    private String destination;
 
-    private Class[] parameterTypes;
-
-    private Object[] args;
+    private MythInvocation mythInvocation;
 }

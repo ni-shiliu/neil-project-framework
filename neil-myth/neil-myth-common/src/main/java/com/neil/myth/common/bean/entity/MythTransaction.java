@@ -2,6 +2,7 @@ package com.neil.myth.common.bean.entity;
 
 import cn.hutool.core.util.IdUtil;
 import com.google.common.collect.Lists;
+import com.neil.myth.common.enums.MythRoleEnum;
 import com.neil.myth.common.enums.MythStatusEnum;
 import lombok.Data;
 
@@ -22,6 +23,8 @@ public class MythTransaction implements Serializable {
     private String transId;
 
     private MythStatusEnum status;
+
+    private MythRoleEnum mythRole;
 
     private volatile int retriedCount;
 

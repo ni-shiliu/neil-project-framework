@@ -1,6 +1,7 @@
 package com.neil.myth.common.serializer;
 
 import com.neil.myth.annotation.MythSPI;
+import com.neil.myth.common.exception.MythException;
 
 /**
  * @author nihao
@@ -8,4 +9,8 @@ import com.neil.myth.annotation.MythSPI;
  */
 @MythSPI
 public interface Serializer {
+
+    byte[] serialize(Object obj) throws MythException;
+
+    <T> T deSerialize(byte[] param, Class<T> clazz) throws MythException;
 }

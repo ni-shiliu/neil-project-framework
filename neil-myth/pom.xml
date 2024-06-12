@@ -19,12 +19,18 @@
     <module>neil-myth-common</module>
     <module>neil-myth-core</module>
       <module>neil-myth-annotation</module>
+    <module>neil-myth-mq</module>
   </modules>
 
   <properties>
     <hutool-all.version>5.7.13</hutool-all.version>
     <guava.version>31.0.1-jre</guava.version>
     <druid.version>1.0.29</druid.version>
+    <aspectjweaver.version>1.8.9</aspectjweaver.version>
+    <disruptor.version>3.4.0</disruptor.version>
+    <kryo.version>4.0.0</kryo.version>
+    <rocketmq.version>4.1.0-incubating</rocketmq.version>
+    <rocketmq-spring-boot-starter.version>2.2.1</rocketmq-spring-boot-starter.version>
   </properties>
 
   <dependencyManagement>
@@ -34,6 +40,43 @@
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
       </dependency>
+
+      <dependency>
+        <groupId>org.aspectj</groupId>
+        <artifactId>aspectjweaver</artifactId>
+        <version>${aspectjweaver.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.lmax</groupId>
+        <artifactId>disruptor</artifactId>
+        <version>${disruptor.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.esotericsoftware</groupId>
+        <artifactId>kryo-shaded</artifactId>
+        <version>${kryo.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-client</artifactId>
+        <version>${rocketmq.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-common</artifactId>
+        <version>${rocketmq.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.rocketmq</groupId>
+        <artifactId>rocketmq-spring-boot-starter</artifactId>
+        <version>${rocketmq-spring-boot-starter.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -72,6 +115,11 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${guava.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.rocketmq</groupId>
+      <artifactId>rocketmq-spring-boot-starter</artifactId>
     </dependency>
 
   </dependencies>
