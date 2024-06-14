@@ -16,17 +16,31 @@ public abstract class AbstractMythTransactionAspect {
 
     private final MythTransactionInterceptor mythTransactionInterceptor;
 
+    /**
+     * 生产者
+     */
     @Pointcut("@annotation(com.neil.myth.annotation.MythProducer)")
     public void mythProducerInterceptor() {
 
     }
 
+    /**
+     * 消费者
+     */
     @Pointcut("@annotation(com.neil.myth.annotation.MythConsumer)")
     public void mythConsumerInterceptor() {
 
     }
 
-    @Pointcut("mythProducerInterceptor() || mythConsumerInterceptor()")
+    /**
+     * 既是生产者也是消费者
+     */
+    @Pointcut("@annotation(com.neil.myth.annotation.Myth)")
+    public void mythInterceptor() {
+
+    }
+
+    @Pointcut("mythProducerInterceptor() || mythConsumerInterceptor() || mythInterceptor()")
     public void mythTransactionInterceptor() {
 
     }

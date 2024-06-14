@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LocalMythTransactionHandler implements MythTransactionHandler {
+
     @Override
     public Object handler(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) throws Throwable {
-        return null;
+        return point.proceed();
     }
+
 }

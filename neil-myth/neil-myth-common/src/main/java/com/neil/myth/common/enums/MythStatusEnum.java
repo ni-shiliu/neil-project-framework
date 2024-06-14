@@ -10,19 +10,11 @@ import lombok.Getter;
 @Getter
 public enum MythStatusEnum {
 
-    ROLLBACK("ROLLBACK", "回滚"),
+    BEGIN("BEGIN", "开始"),
 
     COMMIT("COMMIT", "已经提交"),
 
-    BEGIN("BEGIN", "开始"),
-
-    SEND_MSG("SEND_MSG", "可以发送消息"),
-
-    FAILURE("FAILURE", "失败"),
-
-    PRE_COMMIT("PRE_COMMIT", "预提交"),
-
-    LOCK("LOCK", "锁定");
+    FAILURE("FAILURE", "失败");
 
     private String code;
 
