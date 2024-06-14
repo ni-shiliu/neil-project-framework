@@ -16,7 +16,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
  */
 @Slf4j
 @RequiredArgsConstructor
-@ConditionalOnProperty(prefix = "rocketmq", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "neil.myth.mq.rocketmq.producer", name = "enabled", havingValue = "true")
 public class RocketmqSendServiceImpl implements MythMqSendService {
 
     private final RocketMQTemplate rocketMQTemplate;

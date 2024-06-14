@@ -30,4 +30,16 @@ public class MythConfig {
 
     private int consumerThreads = Runtime.getRuntime().availableProcessors() << 1;
 
+    private Mq mq;
+
+    @Data
+    static class Mq {
+        private Rocketmq rocketmq;
+    }
+
+    @Data
+    static class Rocketmq {
+        private Boolean enabled;
+    }
+
 }

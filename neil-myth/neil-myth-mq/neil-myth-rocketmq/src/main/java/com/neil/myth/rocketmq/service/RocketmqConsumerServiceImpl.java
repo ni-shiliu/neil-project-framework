@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  */
 @Slf4j
 @Service
-@ConditionalOnProperty(prefix = "rocketmq", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "neil.myth.mq.rocketmq.consumer", name = "enabled", havingValue = "true")
 @RocketMQMessageListener(topic = "${rocketmq.consumer.myth.topic}",
         consumerGroup = "${rocketmq.consumer.myth.group}",
         selectorType = SelectorType.TAG,

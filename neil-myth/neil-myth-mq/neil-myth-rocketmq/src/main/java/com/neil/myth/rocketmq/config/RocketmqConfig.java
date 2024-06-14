@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2024/6/12
  */
 @Configuration
-@ConditionalOnProperty(prefix = "rocketmq", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "neil.myth.mq.rocketmq.producer", name = "enabled", havingValue = "true")
 public class RocketmqConfig {
 
     @Value("${rocketmq.name-server}")
