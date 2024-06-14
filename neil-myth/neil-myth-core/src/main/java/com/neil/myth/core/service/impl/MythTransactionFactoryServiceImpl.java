@@ -23,10 +23,9 @@ public class MythTransactionFactoryServiceImpl implements MythTransactionFactory
     @Override
     public Class factoryOf(MythTransactionContext context) throws Throwable {
         if (Objects.isNull(context)) {
-            if (mythTransactionEngine.isBegin()) {
-                return LocalMythTransactionHandler.class;
-            }
-            return StartMythTransactionHandler.class;
+            return mythTransactionEngine.isBegin()
+                    ? LocalMythTransactionHandler.class
+                    : StartMythTransactionHandler.class;
         } else {
             return ActorMythTransactionHandler.class;
         }

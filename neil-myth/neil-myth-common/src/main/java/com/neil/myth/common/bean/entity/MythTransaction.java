@@ -30,7 +30,7 @@ public class MythTransaction implements Serializable {
 
     private LocalDateTime gmtCreated;
 
-    private LocalDateTime gmt_modified;
+    private LocalDateTime gmtModified;
 
     private String targetClass;
 
@@ -43,14 +43,14 @@ public class MythTransaction implements Serializable {
     public MythTransaction() {
         this.transId = IdUtil.fastUUID();
         this.gmtCreated = LocalDateTime.now();
-        this.gmt_modified = LocalDateTime.now();
+        this.gmtModified = LocalDateTime.now();
         mythParticipants = Lists.newCopyOnWriteArrayList();
     }
 
     public MythTransaction(final String transId) {
         this.transId = transId;
         this.gmtCreated = LocalDateTime.now();
-        this.gmt_modified = LocalDateTime.now();
+        this.gmtModified = LocalDateTime.now();
         mythParticipants = Lists.newCopyOnWriteArrayList();
     }
 

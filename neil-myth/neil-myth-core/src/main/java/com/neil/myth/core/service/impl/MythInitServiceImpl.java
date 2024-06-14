@@ -5,8 +5,8 @@ import com.neil.myth.common.config.MythConfig;
 import com.neil.myth.common.loader.MythSPIClassLoader;
 import com.neil.myth.common.serializer.Serializer;
 import com.neil.myth.core.repository.MythRepository;
+import com.neil.myth.core.service.MythCoordinatorService;
 import com.neil.myth.core.service.MythInitService;
-import com.neil.myth.core.service.MythRepositoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,13 +21,13 @@ import org.springframework.stereotype.Service;
 public class MythInitServiceImpl implements MythInitService {
 
 
-    private final MythRepositoryService mythRepositoryService;
+    private final MythCoordinatorService mythCoordinatorService;
 
     @Override
     public void initMyth(MythConfig mythConfig) {
         try {
             loadSpiRepositorySupport(mythConfig);
-            mythRepositoryService.init(mythConfig);
+            mythCoordinatorService.init(mythConfig);
         } catch (Exception e) {
             log.error("Myth init fail: {}", e.getMessage());
             System.exit(1);

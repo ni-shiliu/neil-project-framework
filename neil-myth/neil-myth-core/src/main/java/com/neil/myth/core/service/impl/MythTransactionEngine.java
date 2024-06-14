@@ -8,6 +8,7 @@ import com.neil.myth.common.enums.EventTypeEnum;
 import com.neil.myth.common.enums.MythRoleEnum;
 import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.core.event.MythTransactionEventPublisher;
+import com.neil.myth.core.service.MythSendMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author nihao
@@ -30,6 +32,7 @@ public class MythTransactionEngine {
 
     private final MythTransactionEventPublisher publishEvent;
 
+    private final MythSendMessageService mythSendMessageService;
 
     public boolean isBegin() {
         return null != CURRENT.get();
@@ -87,7 +90,11 @@ public class MythTransactionEngine {
     }
 
     public void sendMessage() {
+        Optional.ofNullable(getCurrentTransaction())
+                .ifPresent(mythSendMessageService::sendMessage);
+    }
 
-
+    private MythTransaction getCurrentTransaction() {
+        return CURRENT.get();
     }
 }

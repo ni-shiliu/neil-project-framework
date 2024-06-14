@@ -18,7 +18,6 @@ public class StartMythTransactionHandler implements MythTransactionHandler {
 
     private final MythTransactionEngine mythTransactionEngine;
 
-
     @Override
     public Object handler(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) throws Throwable {
         try {
@@ -35,4 +34,5 @@ public class StartMythTransactionHandler implements MythTransactionHandler {
             TransactionContextLocal.getInstance().remove();
         }
     }
+
 }

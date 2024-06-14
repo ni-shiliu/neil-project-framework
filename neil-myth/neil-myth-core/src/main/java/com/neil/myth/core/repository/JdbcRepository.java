@@ -5,6 +5,8 @@ import com.neil.myth.annotation.MythSPI;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.config.MythConfig;
 import com.neil.myth.common.config.MythDbConfig;
+import com.neil.myth.common.constant.CommonConstant;
+import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.common.exception.MythException;
 import com.neil.myth.common.serializer.Serializer;
 import com.neil.myth.common.utils.RepositoryPathUtil;
@@ -14,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +38,27 @@ public class JdbcRepository implements MythRepository {
 
     @Override
     public int create(MythTransaction mythTransaction) {
-        return 0;
+        StringBuilder sql = new StringBuilder()
+                .append("insert into ")
+                .append(tableName)
+                .append("(trans_id,target_class,target_method,retried_count,gmt_created,gmt_modified,status,invocation,role,error_msg)")
+                .append(" values(?,?,?,?,?,?,?,?,?,?)");
+        try {
+            final byte[] serialize = serializer.serialize(mythTransaction.getMythParticipants());
+            return executeUpdate(sql.toString(),
+                    mythTransaction.getTransId(),
+                    mythTransaction.getTargetClass(),
+                    mythTransaction.getTargetMethod(),
+                    mythTransaction.getRetriedCount(),
+                    mythTransaction.getGmtCreated(),
+                    mythTransaction.getGmtModified(),
+                    mythTransaction.getStatus(),
+                    serialize,
+                    mythTransaction.getMythRole(),
+                    mythTransaction.getErrorMsg());
+        } catch (MythException e) {
+            return CommonConstant.ERROR;
+        }
     }
 
     @Override
@@ -55,12 +78,19 @@ public class JdbcRepository implements MythRepository {
 
     @Override
     public void updateParticipant(MythTransaction mythTransaction) throws MythException {
-
+        String sql = "update " + tableName + " set status=?, error_msg=?, retried_count =?, gmt_modified = ? where trans_id = ?  ";
+        mythTransaction.setGmtModified(LocalDateTime.now());
+        executeUpdate(sql, mythTransaction.getStatus(),
+                mythTransaction.getErrorMsg(),
+                mythTransaction.getRetriedCount(),
+                mythTransaction.getGmtModified(),
+                mythTransaction.getTransId());
     }
 
     @Override
-    public int updateStatus(String transId, Integer status) throws MythException {
-        return 0;
+    public int updateStatus(String transId, MythStatusEnum status) throws MythException {
+        String sql = "update " + tableName + " set status=?, gmt_modified = ?  where trans_id = ?  ";
+        return executeUpdate(sql, status, LocalDateTime.now(), transId);
     }
 
     @Override

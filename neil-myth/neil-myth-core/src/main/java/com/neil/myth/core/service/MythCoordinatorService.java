@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface MythCoordinatorService {
 
-    void start(MythConfig mythConfig) throws MythException;
+    void init(MythConfig mythConfig) throws MythException;
 
-    String save(MythTransaction mythTransaction);
+    void save(MythTransaction mythTransaction);
 
     MythTransaction findByTransId(String transId);
 
