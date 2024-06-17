@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MythTransactionAspectServiceImpl implements MythTransactionAspectService {
 
+
     private final MythTransactionFactoryService mythTransactionFactoryService;
 
 
@@ -25,7 +26,6 @@ public class MythTransactionAspectServiceImpl implements MythTransactionAspectSe
         Class clazz = mythTransactionFactoryService.factoryOf(mythTransactionContext);
         MythTransactionHandler mythTransactionHandler = (MythTransactionHandler) SpringUtil.getBean(clazz);
         return mythTransactionHandler.handler(point, mythTransactionContext);
-
     }
 
 }

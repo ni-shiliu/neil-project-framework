@@ -1,7 +1,10 @@
 package com.neil.myth.core.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.neil.myth.annotation.Myth;
 import com.neil.myth.common.bean.context.MythTransactionContext;
+import com.neil.myth.common.bean.entity.MythInvocation;
+import com.neil.myth.common.bean.entity.MythParticipant;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.bean.threadlocal.TransactionContextLocal;
 import com.neil.myth.common.enums.EventTypeEnum;
@@ -96,5 +99,31 @@ public class MythTransactionEngine {
 
     private MythTransaction getCurrentTransaction() {
         return CURRENT.get();
+    }
+
+    public void addParticipant(ProceedingJoinPoint point) {
+        MythTransaction currentTransaction = getCurrentTransaction();
+        if (Objects.isNull(currentTransaction)) {
+            return;
+        }
+        Object[] args = point.getArgs();
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Method method = signature.getMethod();
+        Myth myth = method.getAnnotation(Myth.class);
+        if (Objects.isNull(myth)) {
+            return;
+        }
+
+        MythInvocation mythInvocation = new MythInvocation(myth.target(), myth.targetMethod(), method.getParameterTypes(), args);
+        currentTransaction.registerParticipant(new MythParticipant(currentTransaction.getTransId(), myth.destination(), mythInvocation));
+    }
+
+    public void actorTransaction(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) {
+        MythTransaction mythTransaction = generateMythTransaction(point, MythRoleEnum.PROVIDER, MythStatusEnum.BEGIN, mythTransactionContext.getTransId());
+        publishEvent.publishEvent(mythTransaction, EventTypeEnum.SAVE);
+        CURRENT.set(mythTransaction);
+        //设置提供者角色
+        mythTransactionContext.setMythRole(MythRoleEnum.PROVIDER);
+        TransactionContextLocal.getInstance().set(mythTransactionContext);
     }
 }

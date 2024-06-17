@@ -13,4 +13,11 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 public @interface Myth {
 
+    String destination() default "";
+
+    String tags() default "";
+
+    Class target() default Object.class;
+
+    String targetMethod() default "";
 }
