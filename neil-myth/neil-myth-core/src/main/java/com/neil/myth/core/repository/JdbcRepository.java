@@ -44,10 +44,10 @@ public class JdbcRepository implements MythRepository {
                 .append(" values(?,?,?,?,?,?,?,?,?)");
         return executeUpdate(sql.toString(),
                 mythTransaction.getTransId(),
-                mythTransaction.getRole(),
+                mythTransaction.getRole().name(),
                 mythTransaction.getTargetClass(),
                 mythTransaction.getTargetMethod(),
-                mythTransaction.getStatus(),
+                mythTransaction.getStatus().name(),
                 JSONUtil.toJsonStr(mythTransaction.getParticipants()),
                 mythTransaction.getErrorMsg(),
                 mythTransaction.getGmtCreated(),
@@ -58,7 +58,7 @@ public class JdbcRepository implements MythRepository {
     public void updateFailTransaction(MythTransaction mythTransaction) throws MythException {
         String sql = "update " + tableName + " set status=?, error_msg=?, gmt_modified = ? where trans_id = ?  ";
         mythTransaction.setGmtModified(LocalDateTime.now());
-        executeUpdate(sql, mythTransaction.getStatus(),
+        executeUpdate(sql, mythTransaction.getStatus().name(),
                 mythTransaction.getErrorMsg(),
                 mythTransaction.getGmtModified(),
                 mythTransaction.getTransId());
@@ -73,7 +73,7 @@ public class JdbcRepository implements MythRepository {
     @Override
     public int updateStatus(String transId, MythStatusEnum status) throws MythException {
         String sql = "update " + tableName + " set status=?, gmt_modified = ?  where trans_id = ?  ";
-        return executeUpdate(sql, status, LocalDateTime.now(), transId);
+        return executeUpdate(sql, status.name(), LocalDateTime.now(), transId);
     }
 
     @Override

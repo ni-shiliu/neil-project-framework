@@ -102,7 +102,7 @@ public class MythTransactionEngine {
         return CURRENT.get();
     }
 
-    public void addParticipant(ProceedingJoinPoint point) {
+    public void registerParticipant(ProceedingJoinPoint point, MythStatusEnum status) {
         MythTransaction currentTransaction = getCurrentTransaction();
         if (Objects.isNull(currentTransaction)) {
             return;
@@ -119,7 +119,9 @@ public class MythTransactionEngine {
         currentTransaction.registerParticipant(generateMythParticipant(currentTransaction.getTransId(),
                 myth.destination(),
                 mythInvocation,
-                0));
+                0,
+                status.name()));
+        publishEvent.publishEvent(currentTransaction, EventTypeEnum.UPDATE_PARTICIPANT);
     }
 
     public void actorTransaction(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) {
@@ -131,13 +133,16 @@ public class MythTransactionEngine {
         TransactionContextLocal.getInstance().set(mythTransactionContext);
     }
 
-    private MythParticipant generateMythParticipant(String transId, String destination, MythInvocation mythInvocation, Integer retriedCount) {
+    private MythParticipant generateMythParticipant(String transId, String destination,
+                                                    MythInvocation mythInvocation, Integer retriedCount,
+                                                    String status) {
         MythParticipant mythParticipant = new MythParticipant();
         mythParticipant.setParticipantId(IdUtil.fastUUID());
         mythParticipant.setTransId(transId);
         mythParticipant.setDestination(destination);
         mythParticipant.setRetriedCount(retriedCount);
         mythParticipant.setMythInvocation(mythInvocation);
+        mythParticipant.setStatus(status);
         return mythParticipant;
     }
 }

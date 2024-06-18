@@ -1,8 +1,7 @@
 package com.neil.myth;
 
 import com.neil.myth.common.config.MythConfig;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Myth 配置类
@@ -10,8 +9,7 @@ import org.springframework.stereotype.Component;
  * @author nihao
  * @date 2024/6/7
  */
-@Component
-@ConfigurationProperties(prefix = "neil.myth")
+@Configuration
 public class MythConfigProperties extends MythConfig {
 
 }

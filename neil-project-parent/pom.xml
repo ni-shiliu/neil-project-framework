@@ -23,6 +23,8 @@
     <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
     <guava.version>31.0.1-jre</guava.version>
     <neil.myth.version>1.0.0-SNAPSHOT</neil.myth.version>
+    <druid.version>1.0.29</druid.version>
+
   </properties>
 
   <dependencyManagement>
@@ -81,6 +83,12 @@
         <groupId>neil-project-myth</groupId>
         <artifactId>neil-myth-spring-boot-starter</artifactId>
         <version>${neil.myth.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid.version}</version>
       </dependency>
 
     </dependencies>

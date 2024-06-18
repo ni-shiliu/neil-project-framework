@@ -5,14 +5,16 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 /**
  * @author nihao
  * @date 2024/6/11
  */
 @Aspect
+@Component
 @RequiredArgsConstructor
-public abstract class AbstractMythTransactionAspect {
+public class MythTransactionAspect {
 
     private final MythTransactionInterceptor mythTransactionInterceptor;
 

@@ -5,10 +5,3 @@ spring:
     name: neil-project-pc-bff
   profiles:
     active: test
-
-neil:
-  myth:
-    enabled: true
-    mq:
-      rocketmq:
-        enabled: true

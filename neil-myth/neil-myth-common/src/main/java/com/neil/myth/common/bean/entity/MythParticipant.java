@@ -19,6 +19,8 @@ public class MythParticipant implements Serializable {
 
     private String transId;
 
+    private String status;
+
     private String participantId;
 
     private String destination;

@@ -40,7 +40,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Myth()
+    @Myth
     public OrderDTO createOrder(OrderSaveDTO orderSaveDTO) {
         goodsGateway.changeInventory(new GoodsChangeDTO());
         userGateway.registerUser(new UserSaveDTO());

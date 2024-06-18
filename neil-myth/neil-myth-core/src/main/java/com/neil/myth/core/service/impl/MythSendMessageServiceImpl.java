@@ -5,6 +5,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.neil.myth.common.bean.entity.MythParticipant;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.bean.mq.MessageEntity;
+import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.core.service.MythMqSendService;
 import com.neil.myth.core.service.MythSendMessageService;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,9 @@ public class MythSendMessageServiceImpl implements MythSendMessageService {
         }
 
         for (MythParticipant mythParticipant : mythParticipants) {
+            if (MythStatusEnum.COMMIT.name().equals(mythParticipant.getStatus())) {
+                continue;
+            }
             MessageEntity messageEntity = new MessageEntity(mythParticipant.getTransId(), mythParticipant.getMythInvocation());
             try {
                 getMythMqSendService().sendMessage(mythParticipant.getDestination(), messageEntity);

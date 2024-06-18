@@ -27,6 +27,7 @@
     <hutool-all.version>5.7.13</hutool-all.version>
     <guava.version>31.0.1-jre</guava.version>
     <druid.version>1.0.29</druid.version>
+    <mysql-connector-java.version>8.0.26</mysql-connector-java.version>
     <aspectjweaver.version>1.8.9</aspectjweaver.version>
     <disruptor.version>3.4.0</disruptor.version>
     <kryo.version>4.0.0</kryo.version>
@@ -40,6 +41,12 @@
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector-java.version}</version>
       </dependency>
 
       <dependency>

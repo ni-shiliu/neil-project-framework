@@ -1,6 +1,7 @@
 package com.neil.myth.core.handle;
 
 import com.neil.myth.common.bean.context.MythTransactionContext;
+import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.core.service.impl.MythTransactionEngine;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -20,9 +21,11 @@ public class ParticipantMythTransactionHandler implements MythTransactionHandler
     @Override
     public Object handler(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) throws Throwable {
         try {
-            return point.proceed();
+            Object proceed = point.proceed();
+            mythTransactionEngine.registerParticipant(point, MythStatusEnum.COMMIT);
+            return proceed;
         } catch (Throwable throwable) {
-            mythTransactionEngine.addParticipant(point);
+            mythTransactionEngine.registerParticipant(point, MythStatusEnum.FAILURE);
         }
         return null;
     }

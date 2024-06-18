@@ -1,13 +1,19 @@
 package com.neil.myth.common.config;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author nihao
  * @date 2024/6/7
  */
 @Data
+@Configuration
+@ConfigurationProperties(prefix = "neil.myth")
 public class MythConfig {
+
+    private Boolean enabled;
 
     private String repositorySuffix;
 
