@@ -24,4 +24,14 @@ public enum MythStatusEnum {
         this.code = code;
         this.desc = desc;
     }
+
+    public static MythStatusEnum byCode(final String code) {
+        for (MythStatusEnum item : MythStatusEnum.values()) {
+            if (item.getCode().equals(code)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
 }

@@ -20,7 +20,7 @@ public class MythConfig {
     /**
      * 数据存储类型，db
      */
-    private String repositorySupport;
+    private String repositorySupport = "db";
 
     private MythDbConfig mythDbConfig;
 

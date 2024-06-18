@@ -21,16 +21,20 @@ public class SqlUtil {
             case MYSQL:
                 createTableSql.append("CREATE TABLE IF NOT EXISTS `")
                         .append(tableName).append("` (\n")
-                        .append("  `trans_id` varchar(64) NOT NULL,\n")
-                        .append("  `target_class` varchar(256) ,\n")
-                        .append("  `target_method` varchar(128) ,\n")
-                        .append("  `retried_count` int(3) NOT NULL,\n")
-                        .append("  `gmt_created` datetime NOT NULL,\n")
-                        .append("  `gmt_modified` datetime NOT NULL,\n")
-                        .append("  `status` varchar(64) NOT NULL,\n")
-                        .append("  `invocation` longblob,\n")
-                        .append("  `error_msg` text ,\n")
-                        .append("   PRIMARY KEY (`trans_id`),\n")
+                        .append("  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键ID',\n" +
+                                "  `tran_id` varchar(64) NOT NULL COMMENT '事务ID',\n" +
+                                "  `role` varchar(64) NOT NULL COMMENT '角色',\n" +
+                                "  `target_class` varchar(255) NULL,\n" +
+                                "  `target_method` varchar(255) NULL,\n" +
+                                "  `status` varchar(64) NOT NULL COMMENT '状态',\n" +
+                                "  `participants` text NULL COMMENT '参与者',\n" +
+                                "  `error_msg` text NULL COMMENT '失败原因',\n" +
+                                "  `gmt_created` datetime NOT NULL COMMENT '创建时间',\n" +
+                                "  `gmt_modified` datetime NOT NULL COMMENT '更新时间',\n" +
+                                "  PRIMARY KEY (`id`),\n" +
+                                "  INDEX `uniq_trans_id`(`tran_id`),\n" +
+                                "  INDEX `idx_gmt_created`(`gmt_created`),\n" +
+                                "  INDEX `idx_gmt_modified`(`gmt_modified`)")
                         .append("   KEY `status_gmt_modified` (`gmt_modified`,`status`) USING BTREE \n")
                         .append(")");
                 break;

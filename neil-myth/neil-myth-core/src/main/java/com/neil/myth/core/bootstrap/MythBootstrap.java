@@ -23,7 +23,12 @@ public class MythBootstrap implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         log.info("neil-myth start init");
-        this.init();
+        try {
+            this.init();
+        } catch (Exception e) {
+            log.error("Myth init fail: {}", e.getMessage());
+            throw e;
+        }
         log.info("neil-myth init success");
     }
 

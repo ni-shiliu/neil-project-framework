@@ -25,14 +25,8 @@ public class MythInitServiceImpl implements MythInitService {
 
     @Override
     public void initMyth(MythConfig mythConfig) {
-        try {
-            loadSpiRepositorySupport(mythConfig);
-            mythCoordinatorService.init(mythConfig);
-        } catch (Exception e) {
-            log.error("Myth init fail: {}", e.getMessage());
-            System.exit(1);
-        }
-
+        loadSpiRepositorySupport(mythConfig);
+        mythCoordinatorService.init(mythConfig);
     }
 
     private void loadSpiRepositorySupport(MythConfig mythConfig) {
@@ -44,7 +38,7 @@ public class MythInitServiceImpl implements MythInitService {
         // spi repository and register
         final MythRepository mythRepository = MythSPIClassLoader.getMythSPIClassLoader(MythRepository.class)
                 .getActivateMythSPIClazz(mythConfig.getRepositorySupport());
-        mythRepository.setSerializer(serializer);
         SpringUtil.registerBean(MythRepository.class.getName(), mythRepository);
     }
+
 }

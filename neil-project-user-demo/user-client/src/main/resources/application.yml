@@ -1,0 +1,7 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: neil-project-user-demo
+  profiles:
+    active: test

@@ -2,7 +2,9 @@ package com.neil.project.order.api;
 
 import com.neil.project.order.dto.OrderDTO;
 import com.neil.project.order.dto.OrderQueryDTO;
+import com.neil.project.order.dto.OrderSaveDTO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,4 +28,8 @@ public interface OrderFacade {
 
     @PostMapping("list")
     List<OrderDTO> list(@RequestBody OrderQueryDTO orderQueryDTO);
+
+    @ApiOperation("创建订单")
+    @PostMapping("createOrder")
+    OrderDTO createOrder(@RequestBody OrderSaveDTO orderSaveDTO);
 }

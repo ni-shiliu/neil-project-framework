@@ -1,5 +1,6 @@
 package com.neil.myth.core.service.impl;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.neil.myth.annotation.Myth;
 import com.neil.myth.common.bean.context.MythTransactionContext;
@@ -63,7 +64,7 @@ public class MythTransactionEngine {
         Method method = signature.getMethod();
         Class<?> clazz = point.getTarget().getClass();
         mythTransaction.setStatus(mythStatusEnum);
-        mythTransaction.setMythRole(roleEnum);
+        mythTransaction.setRole(roleEnum);
         mythTransaction.setTargetClass(clazz.getName());
         mythTransaction.setTargetMethod(method.getName());
         return mythTransaction;
@@ -115,7 +116,10 @@ public class MythTransactionEngine {
         }
 
         MythInvocation mythInvocation = new MythInvocation(myth.target(), myth.targetMethod(), method.getParameterTypes(), args);
-        currentTransaction.registerParticipant(new MythParticipant(currentTransaction.getTransId(), myth.destination(), mythInvocation));
+        currentTransaction.registerParticipant(generateMythParticipant(currentTransaction.getTransId(),
+                myth.destination(),
+                mythInvocation,
+                0));
     }
 
     public void actorTransaction(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) {
@@ -125,5 +129,15 @@ public class MythTransactionEngine {
         //设置提供者角色
         mythTransactionContext.setMythRole(MythRoleEnum.PROVIDER);
         TransactionContextLocal.getInstance().set(mythTransactionContext);
+    }
+
+    private MythParticipant generateMythParticipant(String transId, String destination, MythInvocation mythInvocation, Integer retriedCount) {
+        MythParticipant mythParticipant = new MythParticipant();
+        mythParticipant.setParticipantId(IdUtil.fastUUID());
+        mythParticipant.setTransId(transId);
+        mythParticipant.setDestination(destination);
+        mythParticipant.setRetriedCount(retriedCount);
+        mythParticipant.setMythInvocation(mythInvocation);
+        return mythParticipant;
     }
 }

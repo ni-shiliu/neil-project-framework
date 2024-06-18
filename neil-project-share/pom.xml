@@ -32,5 +32,10 @@
       <artifactId>spring-data-commons</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>neil-project-myth</groupId>
+      <artifactId>neil-myth-spring-boot-starter</artifactId>
+    </dependency>
+
   </dependencies>
 </project>

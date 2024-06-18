@@ -9,19 +9,28 @@ import lombok.Getter;
 @Getter
 public enum MythRoleEnum {
 
-    START(1, "发起者"),
+    START("START", "发起者"),
 
-    LOCAL(2, "本地执行"),
+    LOCAL("LOCAL", "本地执行"),
 
-    PROVIDER(3, "提供者");
+    PROVIDER("PROVIDER", "提供者");
 
-    private int code;
+    private String code;
 
     private String desc;
 
-    MythRoleEnum(final int code, final String desc) {
+    MythRoleEnum(final String code, final String desc) {
         this.code = code;
         this.desc = desc;
+    }
+
+    public static MythRoleEnum byCode(final String code) {
+        for (MythRoleEnum item : MythRoleEnum.values()) {
+            if (item.getCode().equals(code)) {
+                return item;
+            }
+        }
+        return null;
     }
 
 }

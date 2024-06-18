@@ -5,7 +5,6 @@ import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.config.MythConfig;
 import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.common.exception.MythException;
-import com.neil.myth.common.serializer.Serializer;
 
 import java.util.Date;
 import java.util.List;
@@ -19,10 +18,6 @@ public interface MythRepository {
 
     int create(MythTransaction mythTransaction);
 
-    int remove(String transId);
-
-    int update(MythTransaction mythTransaction) throws MythException;
-
     void updateFailTransaction(MythTransaction mythTransaction) throws MythException;
 
     void updateParticipant(MythTransaction mythTransaction) throws MythException;
@@ -35,5 +30,4 @@ public interface MythRepository {
 
     void init(String modelName, MythConfig mythConfig) throws MythException;
 
-    void setSerializer(Serializer serializer);
 }

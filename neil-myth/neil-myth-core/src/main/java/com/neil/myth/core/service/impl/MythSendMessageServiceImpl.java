@@ -21,7 +21,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class MythSendMessageServiceImpl implements MythSendMessageService {
 
-    private static volatile MythMqSendService mythMqSendService = SpringUtil.getBean(MythMqSendService.class);
+    private volatile MythMqSendService mythMqSendService;
 
     @Override
     public Boolean sendMessage(MythTransaction mythTransaction) {
@@ -29,7 +29,7 @@ public class MythSendMessageServiceImpl implements MythSendMessageService {
             return false;
         }
 
-        List<MythParticipant> mythParticipants = mythTransaction.getMythParticipants();
+        List<MythParticipant> mythParticipants = mythTransaction.getParticipants();
         if (CollUtil.isEmpty(mythParticipants)) {
             return true;
         }
@@ -37,11 +37,22 @@ public class MythSendMessageServiceImpl implements MythSendMessageService {
         for (MythParticipant mythParticipant : mythParticipants) {
             MessageEntity messageEntity = new MessageEntity(mythParticipant.getTransId(), mythParticipant.getMythInvocation());
             try {
-                mythMqSendService.sendMessage(mythParticipant.getDestination(), messageEntity);
+                getMythMqSendService().sendMessage(mythParticipant.getDestination(), messageEntity);
             } catch (Exception e) {
                 return Boolean.FALSE;
             }
         }
         return true;
+    }
+
+    private synchronized MythMqSendService getMythMqSendService() {
+        if (mythMqSendService == null) {
+            synchronized (MythSendMessageServiceImpl.class) {
+                if (mythMqSendService == null) {
+                    mythMqSendService = SpringUtil.getBean(MythMqSendService.class);
+                }
+            }
+        }
+        return mythMqSendService;
     }
 }

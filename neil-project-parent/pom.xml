@@ -22,6 +22,7 @@
     <spring-cloud.version>2020.0.4</spring-cloud.version>
     <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
     <guava.version>31.0.1-jre</guava.version>
+    <neil.myth.version>1.0.0-SNAPSHOT</neil.myth.version>
   </properties>
 
   <dependencyManagement>
@@ -74,6 +75,12 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>neil-project-myth</groupId>
+        <artifactId>neil-myth-spring-boot-starter</artifactId>
+        <version>${neil.myth.version}</version>
       </dependency>
 
     </dependencies>

@@ -66,7 +66,7 @@ public class MythCoordinatorServiceImpl implements MythCoordinatorService {
 
     @Override
     public void updateParticipant(MythTransaction mythTransaction) throws MythException {
-
+        mythRepository.updateParticipant(mythTransaction);
     }
 
     @Override

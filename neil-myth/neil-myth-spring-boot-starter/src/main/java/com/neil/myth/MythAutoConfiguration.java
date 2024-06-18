@@ -3,6 +3,7 @@ package com.neil.myth;
 import com.neil.myth.core.bootstrap.MythBootstrap;
 import com.neil.myth.core.service.MythInitService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,7 +26,9 @@ public class MythAutoConfiguration {
     private final MythConfigProperties mythConfigProperties;
 
     @Bean
+    @ConditionalOnProperty(prefix = "neil.myth", name = "enabled", havingValue = "true")
     public MythBootstrap mythBootstrap(MythInitService mythInitService) {
         return new MythBootstrap(mythInitService, this.mythConfigProperties);
     }
+
 }

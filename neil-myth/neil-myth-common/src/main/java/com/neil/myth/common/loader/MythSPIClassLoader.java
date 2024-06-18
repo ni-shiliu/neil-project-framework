@@ -39,12 +39,12 @@ public class MythSPIClassLoader<T> {
     }
 
     public T getActivateMythSPIClazz(String value) {
-        ServiceLoader<T> loader = ServiceLoader.load(this.clazz);
+        ServiceLoader<T> loader = ServiceLoader.load(clazz);
         Spliterator<T> spliterator = loader.spliterator();
         return StreamSupport.stream(spliterator,false)
-                .filter(e -> e.getClass().getAnnotation(MythSPI.class).equals(value))
+                .filter(e -> e.getClass().getAnnotation(MythSPI.class).value().equals(value))
                 .findFirst()
-                .orElseThrow(() -> new MythException("please check your serializer config"));
+                .orElseThrow(() -> new MythException("please check your SPI config"));
     }
 
 }

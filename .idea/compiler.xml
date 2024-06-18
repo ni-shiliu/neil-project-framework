@@ -11,10 +11,12 @@
         <module name="neil-myth-rocketmq" />
         <module name="neil-project-share" />
         <module name="neil-myth-common" />
-        <module name="order-client" />
         <module name="order-app" />
         <module name="order-infrastructure" />
+        <module name="order-client" />
+        <module name="user-client" />
         <module name="pc-bff-adapter" />
+        <module name="goods-client" />
         <module name="neil-myth-core" />
         <module name="neil-myth-annotation" />
       </profile>
@@ -35,6 +37,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="adapter" options="-parameters" />
+      <module name="goods-client" options="-parameters" />
       <module name="neil-myth-annotation" options="-parameters" />
       <module name="neil-myth-common" options="-parameters" />
       <module name="neil-myth-core" options="-parameters" />
@@ -42,10 +45,10 @@
       <module name="neil-myth-rocketmq" options="-parameters" />
       <module name="neil-myth-spring-boot-starter" options="-parameters" />
       <module name="neil-project-app" options="-parameters" />
-      <module name="neil-project-order" options="" />
+      <module name="neil-project-order-demo" options="" />
       <module name="neil-project-parent-middleware" options="-parameters" />
       <module name="neil-project-parent-share" options="-parameters" />
-      <module name="neil-project-pc-bff" options="" />
+      <module name="neil-project-pc-bff-demo" options="" />
       <module name="neil-project-share" options="-parameters" />
       <module name="neill-project-pc-bff" options="-parameters" />
       <module name="order-app" options="-parameters" />
@@ -54,6 +57,7 @@
       <module name="order-start" options="-parameters" />
       <module name="pc-bff-adapter" options="-parameters" />
       <module name="pc-bff-start" options="-parameters" />
+      <module name="user-client" options="-parameters" />
     </option>
   </component>
 </project>

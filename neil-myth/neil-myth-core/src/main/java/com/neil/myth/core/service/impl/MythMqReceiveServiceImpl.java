@@ -54,17 +54,12 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
                 return true;
             }
 
-            if (mythTransaction.getRetriedCount() >= mythConfig.getRetryMax()) {
-                return false;
-            }
-
             execute(messageEntity);
             //执行成功 更新日志为成功
             mythTransaction.setStatus(MythStatusEnum.COMMIT);
             publisher.publishEvent(mythTransaction, EventTypeEnum.UPDATE_STATUS);
         } catch (Exception e) {
             mythTransaction.setErrorMsg(getExceptionMessage(e));
-            mythTransaction.setRetriedCount(mythTransaction.getRetriedCount() + 1);
             publisher.publishEvent(mythTransaction, EventTypeEnum.UPDATE_FAIR);
             throw new MythException(e);
         } finally {

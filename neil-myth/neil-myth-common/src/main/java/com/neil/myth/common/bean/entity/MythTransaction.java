@@ -20,13 +20,13 @@ public class MythTransaction implements Serializable {
 
     private static final long serialVersionUID = 8756520926024193343L;
 
+    private Long id;
+
     private String transId;
 
     private MythStatusEnum status;
 
-    private MythRoleEnum mythRole;
-
-    private volatile int retriedCount;
+    private MythRoleEnum role;
 
     private LocalDateTime gmtCreated;
 
@@ -38,24 +38,24 @@ public class MythTransaction implements Serializable {
 
     private String errorMsg;
 
-    private List<MythParticipant> mythParticipants;
+    private List<MythParticipant> participants;
 
     public MythTransaction() {
         this.transId = IdUtil.fastUUID();
         this.gmtCreated = LocalDateTime.now();
         this.gmtModified = LocalDateTime.now();
-        mythParticipants = Lists.newCopyOnWriteArrayList();
+        participants = Lists.newCopyOnWriteArrayList();
     }
 
     public MythTransaction(final String transId) {
         this.transId = transId;
         this.gmtCreated = LocalDateTime.now();
         this.gmtModified = LocalDateTime.now();
-        mythParticipants = Lists.newCopyOnWriteArrayList();
+        participants = Lists.newCopyOnWriteArrayList();
     }
 
     public void registerParticipant(final MythParticipant mythParticipant) {
-        mythParticipants.add(mythParticipant);
+        participants.add(mythParticipant);
     }
 
 }
