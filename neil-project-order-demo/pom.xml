@@ -3,7 +3,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>neil-project-order-demo</artifactId>
-  <name>neil-project-order</name>
+  <name>neil-project-order-demo</name>
   <packaging>pom</packaging>
 
   <parent>
