@@ -36,6 +36,8 @@ public class MythTransaction implements Serializable {
 
     private String targetMethod;
 
+    private String args;
+
     private String errorMsg;
 
     private List<MythParticipant> participants;

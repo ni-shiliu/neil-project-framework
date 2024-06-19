@@ -17,7 +17,4 @@ public @interface Myth {
 
     String tags() default "";
 
-    Class target() default Object.class;
-
-    String targetMethod() default "";
 }

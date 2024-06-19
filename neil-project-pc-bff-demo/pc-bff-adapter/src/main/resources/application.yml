@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8079
 spring:
   application:
     name: neil-project-pc-bff

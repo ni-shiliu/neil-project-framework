@@ -1,4 +1,4 @@
-package com.neil.project.user;
+package com.neil.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

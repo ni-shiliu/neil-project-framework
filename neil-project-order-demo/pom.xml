@@ -18,9 +18,6 @@
     <module>order-infrastructure</module>
   </modules>
 
-  <properties>
-  </properties>
-
   <dependencies>
 
     <dependency>

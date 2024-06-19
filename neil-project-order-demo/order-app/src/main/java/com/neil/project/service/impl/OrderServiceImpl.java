@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     @Myth
     public OrderDTO createOrder(OrderSaveDTO orderSaveDTO) {
         goodsGateway.changeInventory(new GoodsChangeDTO());
-        userGateway.registerUser(new UserSaveDTO());
+        userGateway.registerUser(new UserSaveDTO().setUserName("neil"));
         return null;
     }
 

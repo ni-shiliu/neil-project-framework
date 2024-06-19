@@ -40,8 +40,8 @@ public class JdbcRepository implements MythRepository {
         StringBuilder sql = new StringBuilder()
                 .append("insert into ")
                 .append(tableName)
-                .append("(trans_id, role, target_class, target_method, status, participants, error_msg, gmt_created,gmt_modified)")
-                .append(" values(?,?,?,?,?,?,?,?,?)");
+                .append("(trans_id, role, target_class, target_method, status, participants, args, error_msg, gmt_created, gmt_modified)")
+                .append(" values(?,?,?,?,?,?,?,?,?,?)");
         return executeUpdate(sql.toString(),
                 mythTransaction.getTransId(),
                 mythTransaction.getRole().name(),
@@ -49,6 +49,7 @@ public class JdbcRepository implements MythRepository {
                 mythTransaction.getTargetMethod(),
                 mythTransaction.getStatus().name(),
                 JSONUtil.toJsonStr(mythTransaction.getParticipants()),
+                mythTransaction.getArgs(),
                 mythTransaction.getErrorMsg(),
                 mythTransaction.getGmtCreated(),
                 mythTransaction.getGmtModified());

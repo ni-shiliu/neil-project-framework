@@ -2,6 +2,19 @@ server:
   port: 8091
 spring:
   application:
-    name: neil-project-user-demo
+    name: neil-project-user
   profiles:
     active: test
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+
+neil:
+  myth:
+    enabled: true
+    myth-db-config:
+      url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: 123456

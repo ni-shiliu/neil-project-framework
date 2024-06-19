@@ -2,6 +2,7 @@ package com.neil.myth.core.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.neil.myth.annotation.Myth;
 import com.neil.myth.common.bean.context.MythTransactionContext;
 import com.neil.myth.common.bean.entity.MythInvocation;
@@ -60,6 +61,7 @@ public class MythTransactionEngine {
         MythTransaction mythTransaction = StrUtil.isBlank(transId)
                 ? new MythTransaction()
                 : new MythTransaction(transId);
+        Object[] args = point.getArgs();
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
         Class<?> clazz = point.getTarget().getClass();
@@ -67,6 +69,7 @@ public class MythTransactionEngine {
         mythTransaction.setRole(roleEnum);
         mythTransaction.setTargetClass(clazz.getName());
         mythTransaction.setTargetMethod(method.getName());
+        mythTransaction.setArgs(JSONUtil.toJsonStr(args));
         return mythTransaction;
     }
 
@@ -115,7 +118,7 @@ public class MythTransactionEngine {
             return;
         }
 
-        MythInvocation mythInvocation = new MythInvocation(myth.target(), myth.targetMethod(), method.getParameterTypes(), args);
+        MythInvocation mythInvocation = new MythInvocation(signature.getClass(), method.getName(), method.getParameterTypes(), args);
         currentTransaction.registerParticipant(generateMythParticipant(currentTransaction.getTransId(),
                 myth.destination(),
                 mythInvocation,

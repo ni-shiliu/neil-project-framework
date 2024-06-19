@@ -1,7 +1,7 @@
 package com.neil.project.gateway.impl;
 
-import com.neil.project.gateway.UserGateway;
 import com.neil.project.user.api.UserFacade;
+import com.neil.project.gateway.UserGateway;
 import com.neil.project.user.dto.UserDTO;
 import com.neil.project.user.dto.UserSaveDTO;
 import lombok.RequiredArgsConstructor;
