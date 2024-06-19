@@ -28,4 +28,6 @@ public class MythParticipant implements Serializable {
     private Integer retriedCount;
 
     private MythInvocation mythInvocation;
+
+    private String errorMsg;
 }

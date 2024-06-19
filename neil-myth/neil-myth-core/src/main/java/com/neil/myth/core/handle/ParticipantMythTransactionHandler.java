@@ -22,10 +22,10 @@ public class ParticipantMythTransactionHandler implements MythTransactionHandler
     public Object handler(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) throws Throwable {
         try {
             Object proceed = point.proceed();
-            mythTransactionEngine.registerParticipant(point, MythStatusEnum.COMMIT);
+            mythTransactionEngine.registerParticipant(point, MythStatusEnum.COMMIT, null);
             return proceed;
         } catch (Throwable throwable) {
-            mythTransactionEngine.registerParticipant(point, MythStatusEnum.FAILURE);
+            mythTransactionEngine.registerParticipant(point, MythStatusEnum.FAILURE, throwable.getMessage());
         }
         return null;
     }
