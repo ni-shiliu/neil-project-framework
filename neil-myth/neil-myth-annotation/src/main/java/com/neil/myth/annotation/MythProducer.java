@@ -11,6 +11,10 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-public @interface Myth {
+public @interface MythProducer {
+
+    String destination() default "";
+
+    String tags() default "";
 
 }

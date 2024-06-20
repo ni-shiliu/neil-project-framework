@@ -1,6 +1,6 @@
 package com.neil.project.user.api;
 
-import com.neil.myth.annotation.Myth;
+import com.neil.myth.annotation.MythProducer;
 import com.neil.project.user.dto.UserDTO;
 import com.neil.project.user.dto.UserSaveDTO;
 import io.swagger.annotations.Api;
@@ -26,7 +26,7 @@ public interface UserFacade {
 
     @ApiOperation("注册用户")
     @PostMapping("registerUser")
-    @Myth(destination = "MYTH-USER", tags = "user")
+    @MythProducer(destination = "MYTH-USER", tags = "user")
     UserDTO registerUser(@RequestBody UserSaveDTO userSaveDTO);
 
 }

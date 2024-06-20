@@ -3,7 +3,7 @@ package com.neil.myth.core.service.impl;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
-import com.neil.myth.annotation.Myth;
+import com.neil.myth.annotation.MythProducer;
 import com.neil.myth.common.bean.context.MythTransactionContext;
 import com.neil.myth.common.bean.entity.MythInvocation;
 import com.neil.myth.common.bean.entity.MythParticipant;
@@ -116,7 +116,7 @@ public class MythTransactionEngine {
         Object[] args = point.getArgs();
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
-        Myth myth = method.getAnnotation(Myth.class);
+        MythProducer myth = method.getAnnotation(MythProducer.class);
         if (Objects.isNull(myth)) {
             return;
         }

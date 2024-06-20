@@ -127,11 +127,11 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
             return;
         }
 
-        final Class clazz = mythInvocation.getTargetClass();
-        final String method = mythInvocation.getMethodName();
-        final Object[] args = mythInvocation.getArgs();
-        final Class[] parameterTypes = mythInvocation.getParameterTypes();
-        final Object bean = SpringUtil.getBean(clazz);
+        Class clazz = mythInvocation.getTargetClass();
+        String method = mythInvocation.getMethodName();
+        Object[] args = mythInvocation.getArgs();
+        Class[] parameterTypes = mythInvocation.getParameterTypes();
+        Object bean = SpringUtil.getBean(clazz);
         MethodUtils.invokeMethod(bean, method, args, parameterTypes);
     }
 

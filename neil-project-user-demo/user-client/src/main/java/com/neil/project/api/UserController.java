@@ -1,10 +1,12 @@
 package com.neil.project.api;
 
-import com.neil.myth.annotation.Myth;
+import cn.hutool.json.JSONUtil;
+import com.neil.myth.annotation.MythConsumer;
+import com.neil.project.user.api.UserFacade;
 import com.neil.project.user.dto.UserDTO;
 import com.neil.project.user.dto.UserSaveDTO;
-import com.neil.project.user.api.UserFacade;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author nihao
  * @date 2024/6/18
  */
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class UserController implements UserFacade {
@@ -23,8 +26,9 @@ public class UserController implements UserFacade {
     }
 
     @Override
-    @Myth(destination = "GID-TOPIC1")
+    @MythConsumer
     public UserDTO registerUser(@RequestBody UserSaveDTO userSaveDTO) {
+        log.info("registerUser success param: {}", JSONUtil.toJsonStr(userSaveDTO));
         return null;
     }
 

@@ -12,6 +12,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 
 /**
  * @author nihao
@@ -26,9 +27,15 @@ public class MythTransactionInterceptorImpl implements MythTransactionIntercepto
 
     @Override
     public Object interceptor(ProceedingJoinPoint pjp) throws Throwable {
-        RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
-        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-        MythTransactionContext mythTransactionContext = RpcMediator.getInstance().acquire(request::getHeader);
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        MythTransactionContext mythTransactionContext;
+        if (Objects.isNull(requestAttributes)) {
+            // 通过消息反射执行, mock new MythTransactionContext
+            mythTransactionContext = new MythTransactionContext();
+        } else {
+            HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+            mythTransactionContext = RpcMediator.getInstance().acquire(request::getHeader);
+        }
         return mythTransactionAspectService.invoke(mythTransactionContext, pjp);
     }
 

@@ -4,7 +4,6 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.config.MythConfig;
-import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.common.exception.MythException;
 import com.neil.myth.core.repository.MythRepository;
 import com.neil.myth.core.service.MythApplicationService;
@@ -41,7 +40,7 @@ public class MythCoordinatorServiceImpl implements MythCoordinatorService {
 
     @Override
     public MythTransaction findByTransId(String transId) {
-        return null;
+        return mythRepository.findByTransId(transId);
     }
 
     @Override

@@ -171,6 +171,7 @@ public class JdbcRepository implements MythRepository {
         mythTransaction.setGmtCreated(LocalDateTime.parse(map.get("gmt_created").toString()));
         mythTransaction.setGmtModified(LocalDateTime.parse(map.get("gmt_modified").toString()));
         mythTransaction.setStatus(MythStatusEnum.byCode(map.get("status").toString()));
+        mythTransaction.setRetryCount(Integer.valueOf(map.get("retry_count").toString()));
         mythTransaction.setRole(MythRoleEnum.byCode(map.get("role").toString()));
         mythTransaction.setParticipants(JSONUtil.toBean(map.get("participants").toString(),
                 new TypeReference<List<MythParticipant>>() {}, false));

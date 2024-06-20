@@ -1,6 +1,6 @@
 package com.neil.project.goods.api;
 
-import com.neil.myth.annotation.Myth;
+import com.neil.myth.annotation.MythProducer;
 import com.neil.project.goods.dto.GoodsChangeDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +24,7 @@ public interface GoodsFacade {
 
     @ApiOperation("变更库存")
     @PostMapping("changeInventory")
-    @Myth(destination = "MYTH-GOODS", tags = "goods")
+    @MythProducer(destination = "MYTH-GOODS", tags = "goods")
     void changeInventory(@RequestBody GoodsChangeDTO goodsChangeDTO);
 
 }
