@@ -20,7 +20,7 @@ import java.util.List;
         contextId = "neil-project-order",
         url = "localhost:8090"
 )
-@RequestMapping("/v1/order/")
+@RequestMapping("/v1/order")
 public interface OrderFacade {
 
     @GetMapping("getByOrderNo")

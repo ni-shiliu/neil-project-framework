@@ -18,7 +18,7 @@ public class RocketmqConfig {
     @Value("${rocketmq.name-server}")
     private String nameServer;
 
-    @Value("${rocketmq.producer.group}")
+    @Value("${neil.myth.mq.rocketmq.producer-group}")
     private String producerGroup;
 
     @Bean

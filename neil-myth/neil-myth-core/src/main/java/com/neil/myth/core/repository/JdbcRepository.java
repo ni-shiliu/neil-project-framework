@@ -40,14 +40,15 @@ public class JdbcRepository implements MythRepository {
         StringBuilder sql = new StringBuilder()
                 .append("insert into ")
                 .append(tableName)
-                .append("(trans_id, role, target_class, target_method, status, participants, args, error_msg, gmt_created, gmt_modified)")
-                .append(" values(?,?,?,?,?,?,?,?,?,?)");
+                .append("(trans_id, role, target_class, target_method, status, retry_count, participants, args, error_msg, gmt_created, gmt_modified)")
+                .append(" values(?,?,?,?,?,?,?,?,?,?,?)");
         return executeUpdate(sql.toString(),
                 mythTransaction.getTransId(),
                 mythTransaction.getRole().name(),
                 mythTransaction.getTargetClass(),
                 mythTransaction.getTargetMethod(),
                 mythTransaction.getStatus().name(),
+                mythTransaction.getRetryCount(),
                 JSONUtil.toJsonStr(mythTransaction.getParticipants()),
                 mythTransaction.getArgs(),
                 mythTransaction.getErrorMsg(),
@@ -57,10 +58,11 @@ public class JdbcRepository implements MythRepository {
 
     @Override
     public void updateFailTransaction(MythTransaction mythTransaction) throws MythException {
-        String sql = "update " + tableName + " set status=?, error_msg=?, gmt_modified = ? where trans_id = ?  ";
+        String sql = "update " + tableName + " set status=?, error_msg=?, retry_count=?, gmt_modified = ? where trans_id = ?  ";
         mythTransaction.setGmtModified(LocalDateTime.now());
         executeUpdate(sql, mythTransaction.getStatus().name(),
                 mythTransaction.getErrorMsg(),
+                mythTransaction.getRetryCount(),
                 mythTransaction.getGmtModified(),
                 mythTransaction.getTransId());
     }
@@ -72,9 +74,12 @@ public class JdbcRepository implements MythRepository {
     }
 
     @Override
-    public int updateStatus(String transId, MythStatusEnum status) throws MythException {
-        String sql = "update " + tableName + " set status=?, gmt_modified = ?  where trans_id = ?  ";
-        return executeUpdate(sql, status.name(), LocalDateTime.now(), transId);
+    public int updateStatus(MythTransaction mythTransaction) throws MythException {
+        String sql = "update " + tableName + " set status=?, retry_count=?, gmt_modified = ?  where trans_id = ?  ";
+        return executeUpdate(sql, mythTransaction.getStatus().name(),
+                mythTransaction.getRetryCount(),
+                LocalDateTime.now(),
+                mythTransaction.getTransId());
     }
 
     @Override

@@ -19,11 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
         contextId = "neil-project-goods",
         url = "localhost:8092"
 )
-@RequestMapping("/v1/goods/")
+@RequestMapping("/v1/goods")
 public interface GoodsFacade {
 
     @ApiOperation("变更库存")
     @PostMapping("changeInventory")
-    @Myth(destination = "ORDER-MYTH", tags = "goods")
+    @Myth(destination = "MYTH-GOODS", tags = "goods")
     void changeInventory(@RequestBody GoodsChangeDTO goodsChangeDTO);
+
 }

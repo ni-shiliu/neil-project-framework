@@ -28,6 +28,7 @@ public class SqlUtil {
                                 "  `target_method` varchar(255) NULL,\n" +
                                 "  `status` varchar(64) NOT NULL COMMENT '状态',\n" +
                                 "  `participants` text NULL COMMENT '参与者',\n" +
+                                "  `retry_count` int(3) NULL COMMENT '重试次数',\n" +
                                 "  `args` text NULL COMMENT '参数',\n" +
                                 "  `error_msg` text NULL COMMENT '失败原因',\n" +
                                 "  `gmt_created` datetime NOT NULL COMMENT '创建时间',\n" +

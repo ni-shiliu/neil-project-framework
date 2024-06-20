@@ -3,6 +3,7 @@ package com.neil.myth.common.bean.mq;
 import com.neil.myth.common.bean.entity.MythInvocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class MessageEntity implements Serializable {
 
 

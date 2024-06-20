@@ -42,6 +42,7 @@ public class MythConfig {
     @Configuration
     @ConfigurationProperties(prefix = "neil.myth.mq")
     static class Mq {
+
         private Rocketmq rocketmq;
     }
 
@@ -49,8 +50,16 @@ public class MythConfig {
     @Configuration
     @ConfigurationProperties(prefix = "neil.myth.mq.rocketmq")
     static class Rocketmq {
+
         private Boolean producerEnabled;
+
+        private String producerGroup;
+
         private Boolean consumerEnabled;
+
+        private String consumerTopic;
+
+        private String consumerGroup;
     }
 
 

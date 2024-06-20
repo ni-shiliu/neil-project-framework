@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
@@ -111,6 +112,7 @@ public class MythTransactionEngine {
         if (Objects.isNull(currentTransaction)) {
             return;
         }
+        Class<?> clazz = AopProxyUtils.proxiedUserInterfaces(point.getTarget())[0];
         Object[] args = point.getArgs();
         MethodSignature signature = (MethodSignature) point.getSignature();
         Method method = signature.getMethod();
@@ -119,7 +121,7 @@ public class MythTransactionEngine {
             return;
         }
 
-        MythInvocation mythInvocation = new MythInvocation(signature.getClass(), method.getName(), method.getParameterTypes(), args);
+        MythInvocation mythInvocation = new MythInvocation(clazz, method.getName(), method.getParameterTypes(), args);
         String destination = myth.destination();
         if (Strings.isNotBlank(myth.tags())) {
             destination = destination + ":" + myth.tags();

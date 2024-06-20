@@ -26,6 +26,8 @@ public class MythTransaction implements Serializable {
 
     private MythStatusEnum status;
 
+    private Integer retryCount;
+
     private MythRoleEnum role;
 
     private LocalDateTime gmtCreated;

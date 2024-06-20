@@ -5,3 +5,19 @@ spring:
     name: neil-project-goods
   profiles:
     active: test
+
+neil:
+  myth:
+    enabled: true
+    myth-db-config:
+      url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: 123456
+    mq:
+      rocketmq:
+        consumer-enabled: true
+        consumer-topic: MYTH-GOODS
+        consumer-group: MYTH-GOODS-GROUP
+
+rocketmq:
+  name-server: localhost:9876

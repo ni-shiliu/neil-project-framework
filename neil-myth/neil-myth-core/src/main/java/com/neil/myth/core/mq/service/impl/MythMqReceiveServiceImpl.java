@@ -11,6 +11,7 @@ import com.neil.myth.common.enums.EventTypeEnum;
 import com.neil.myth.common.enums.MythRoleEnum;
 import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.common.exception.MythException;
+import com.neil.myth.common.serializer.Serializer;
 import com.neil.myth.core.event.MythTransactionEventPublisher;
 import com.neil.myth.core.service.MythCoordinatorService;
 import com.neil.myth.core.service.MythMqReceiveService;
@@ -39,34 +40,78 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
 
     private final MythTransactionEventPublisher publisher;
 
+    private Serializer serializer;
+
     private static final Lock LOCK = new ReentrantLock();
 
     @Override
-    public Boolean processMessage(MessageEntity messageEntity) {
-        LOCK.lock();
+    public Boolean processMessage(byte[] body) {
+        MessageEntity messageEntity = getObjectSerializer().deSerialize(body, MessageEntity.class);
         MythTransaction mythTransaction = mythCoordinatorService.findByTransId(messageEntity.getTransId());
+        LOCK.lock();
         try {
             if (Objects.isNull(mythTransaction)) {
-                return false;
+                doProcessMessage(messageEntity);
+            } else {
+                reProcessMessage(messageEntity, mythTransaction);
             }
-
-            if (!MythStatusEnum.FAILURE.equals(mythTransaction.getStatus())) {
-                return true;
-            }
-
-            execute(messageEntity);
-            //执行成功 更新日志为成功
-            mythTransaction.setStatus(MythStatusEnum.COMMIT);
-            publisher.publishEvent(mythTransaction, EventTypeEnum.UPDATE_STATUS);
         } catch (Exception e) {
-            mythTransaction.setErrorMsg(getExceptionMessage(e));
-            publisher.publishEvent(mythTransaction, EventTypeEnum.UPDATE_FAIR);
+            if (Objects.isNull(mythTransaction)) {
+                MythTransaction log = generateMythTransaction(messageEntity.getTransId(), getExceptionMessage(e),
+                        MythStatusEnum.FAILURE,
+                        messageEntity.getMythInvocation().getTargetClass().getName(),
+                        messageEntity.getMythInvocation().getMethodName());
+                publisher.publishEvent(log, EventTypeEnum.SAVE);
+            } else {
+                mythTransaction.setErrorMsg(getExceptionMessage(e));
+                mythTransaction.setRetryCount((mythTransaction.getRetryCount() == null
+                        ? 0
+                        : mythTransaction.getRetryCount()) + 1);
+                publisher.publishEvent(mythTransaction, EventTypeEnum.UPDATE_FAIR);
+            }
             throw new MythException(e);
         } finally {
             TransactionContextLocal.getInstance().remove();
             LOCK.unlock();
         }
         return true;
+    }
+
+    private void doProcessMessage(MessageEntity messageEntity) throws Exception {
+        execute(messageEntity);
+        final MythTransaction log = generateMythTransaction(messageEntity.getTransId(), null,
+                MythStatusEnum.COMMIT,
+                messageEntity.getMythInvocation().getTargetClass().getName(),
+                messageEntity.getMythInvocation().getMethodName());
+        publisher.publishEvent(log, EventTypeEnum.SAVE);
+    }
+
+    private MythTransaction generateMythTransaction(String transId, String errorMsg, MythStatusEnum status, String targetClass, String methodName) {
+        MythTransaction logTransaction = new MythTransaction(transId);
+        logTransaction.setStatus(status);
+        logTransaction.setErrorMsg(errorMsg);
+        logTransaction.setRole(MythRoleEnum.PROVIDER);
+        logTransaction.setTargetClass(targetClass);
+        logTransaction.setTargetMethod(methodName);
+        logTransaction.setRetryCount(1);
+        return logTransaction;
+    }
+
+    private void reProcessMessage(MessageEntity messageEntity, MythTransaction mythTransaction) throws Exception {
+        if (!MythStatusEnum.FAILURE.equals(mythTransaction.getStatus())) {
+            return;
+        }
+        if (mythTransaction.getRetryCount() >= mythConfig.getRetryMax()) {
+            log.debug("trans_id: {}, 超过最大重试次数", mythTransaction.getTransId());
+            return;
+        }
+        execute(messageEntity);
+        //执行成功 更新日志为成功
+        mythTransaction.setStatus(MythStatusEnum.COMMIT);
+        mythTransaction.setRetryCount((mythTransaction.getRetryCount() == null
+                ? 0
+                : mythTransaction.getRetryCount()) + 1);
+        publisher.publishEvent(mythTransaction, EventTypeEnum.UPDATE_STATUS);
     }
 
     private void execute(MessageEntity messageEntity) throws Exception {
@@ -98,4 +143,14 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
         return exceptionMessage;
     }
 
+    private synchronized Serializer getObjectSerializer() {
+        if (serializer == null) {
+            synchronized (MythSendMessageServiceImpl.class) {
+                if (serializer == null) {
+                    serializer = SpringUtil.getBean(Serializer.class);
+                }
+            }
+        }
+        return serializer;
+    }
 }

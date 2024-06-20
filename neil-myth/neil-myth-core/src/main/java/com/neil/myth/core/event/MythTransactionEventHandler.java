@@ -32,7 +32,7 @@ public class MythTransactionEventHandler implements WorkHandler<MythTransactionE
                     break;
                 case UPDATE_STATUS:
                     MythTransaction mythTransaction = mythTransactionEvent.getMythTransaction();
-                    mythCoordinatorService.updateStatus(mythTransaction.getTransId(), mythTransaction.getStatus());
+                    mythCoordinatorService.updateStatus(mythTransaction);
                     break;
                 case UPDATE_PARTICIPANT:
                     mythCoordinatorService.updateParticipant(mythTransactionEvent.getMythTransaction());

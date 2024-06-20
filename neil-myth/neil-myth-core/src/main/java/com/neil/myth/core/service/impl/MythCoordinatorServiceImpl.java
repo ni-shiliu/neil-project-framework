@@ -70,8 +70,8 @@ public class MythCoordinatorServiceImpl implements MythCoordinatorService {
     }
 
     @Override
-    public int updateStatus(String transId, MythStatusEnum status) throws MythException {
-        return mythRepository.updateStatus(transId, status);
+    public int updateStatus(MythTransaction mythTransaction) throws MythException {
+        return mythRepository.updateStatus(mythTransaction);
     }
 
     private String getRepositorySuffix(String repositorySuffix) {

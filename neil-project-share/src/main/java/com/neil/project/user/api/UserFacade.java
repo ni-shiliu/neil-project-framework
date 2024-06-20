@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
         contextId = "neil-project-user",
         url = "localhost:8091"
 )
-@RequestMapping("/v1/user/")
+@RequestMapping("/v1/user")
 public interface UserFacade {
 
     @GetMapping("getUserById")
@@ -26,7 +26,7 @@ public interface UserFacade {
 
     @ApiOperation("注册用户")
     @PostMapping("registerUser")
-    @Myth(destination = "ORDER-MYTH", tags = "user")
+    @Myth(destination = "MYTH-USER", tags = "user")
     UserDTO registerUser(@RequestBody UserSaveDTO userSaveDTO);
 
 }

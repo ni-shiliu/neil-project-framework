@@ -3,7 +3,6 @@ package com.neil.myth.core.repository;
 import com.neil.myth.annotation.MythSPI;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.config.MythConfig;
-import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.common.exception.MythException;
 
 import java.util.Date;
@@ -22,7 +21,7 @@ public interface MythRepository {
 
     void updateParticipant(MythTransaction mythTransaction) throws MythException;
 
-    int updateStatus(String transId, MythStatusEnum status) throws MythException;
+    int updateStatus(MythTransaction mythTransaction) throws MythException;
 
     MythTransaction findByTransId(String transId);
 
