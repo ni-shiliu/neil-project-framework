@@ -39,13 +39,20 @@ public class MythConfig {
     private Mq mq;
 
     @Data
+    @Configuration
+    @ConfigurationProperties(prefix = "neil.myth.mq")
     static class Mq {
         private Rocketmq rocketmq;
     }
 
     @Data
+    @Configuration
+    @ConfigurationProperties(prefix = "neil.myth.mq.rocketmq")
     static class Rocketmq {
-        private Boolean enabled;
+        private Boolean producerEnabled;
+        private Boolean consumerEnabled;
     }
+
+
 
 }

@@ -13,9 +13,10 @@ import com.neil.myth.common.enums.EventTypeEnum;
 import com.neil.myth.common.enums.MythRoleEnum;
 import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.core.event.MythTransactionEventPublisher;
-import com.neil.myth.core.service.MythSendMessageService;
+import com.neil.myth.core.mq.service.MythSendMessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Service;
@@ -119,8 +120,12 @@ public class MythTransactionEngine {
         }
 
         MythInvocation mythInvocation = new MythInvocation(signature.getClass(), method.getName(), method.getParameterTypes(), args);
+        String destination = myth.destination();
+        if (Strings.isNotBlank(myth.tags())) {
+            destination = destination + ":" + myth.tags();
+        }
         currentTransaction.registerParticipant(generateMythParticipant(currentTransaction.getTransId(),
-                myth.destination(),
+                destination,
                 mythInvocation,
                 0,
                 status.name(),

@@ -1,4 +1,4 @@
-package com.neil.myth.rocketmq.config;
+package com.neil.myth.core.mq.rocketmq.config;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2024/6/12
  */
 @Configuration
-@ConditionalOnProperty(prefix = "neil.myth.mq.rocketmq.producer", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "neil.myth.mq.rocketmq", name = "producer-enabled", havingValue = "true")
 public class RocketmqConfig {
 
     @Value("${rocketmq.name-server}")
@@ -29,6 +29,5 @@ public class RocketmqConfig {
         rocketMQTemplate.setProducer(defaultMQProducer);
         return rocketMQTemplate;
     }
-
 
 }

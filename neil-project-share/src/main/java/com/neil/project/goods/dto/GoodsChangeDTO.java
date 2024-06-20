@@ -9,5 +9,5 @@ import lombok.Data;
 @Data
 public class GoodsChangeDTO {
 
-    private String goodsId;
+    private String goodsId = "aaa";
 }

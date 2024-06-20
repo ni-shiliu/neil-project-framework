@@ -1,12 +1,16 @@
 package com.neil.myth.common.config;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author nihao
  * @date 2024/6/7
  */
 @Data
+@Configuration
+@ConfigurationProperties(prefix = "neil.myth.myth-db-config")
 public class MythDbConfig {
 
     private String driverClassName = "com.mysql.jdbc.Driver";

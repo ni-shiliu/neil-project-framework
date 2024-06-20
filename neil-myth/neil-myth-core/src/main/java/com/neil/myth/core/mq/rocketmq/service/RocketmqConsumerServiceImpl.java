@@ -1,4 +1,4 @@
-package com.neil.myth.rocketmq.service;
+package com.neil.myth.core.mq.rocketmq.service;
 
 import com.neil.myth.common.bean.mq.MessageEntity;
 import com.neil.myth.core.service.MythMqReceiveService;

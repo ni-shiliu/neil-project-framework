@@ -1,4 +1,4 @@
-package com.neil.myth.core.service.impl;
+package com.neil.myth.core.mq.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.extra.spring.SpringUtil;
@@ -6,9 +6,10 @@ import com.neil.myth.common.bean.entity.MythParticipant;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.bean.mq.MessageEntity;
 import com.neil.myth.common.enums.MythStatusEnum;
-import com.neil.myth.core.service.MythMqSendService;
-import com.neil.myth.core.service.MythSendMessageService;
+import com.neil.myth.core.mq.service.MythMqSendService;
+import com.neil.myth.core.mq.service.MythSendMessageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.Objects;
  * @author nihao
  * @date 2024/6/12
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MythSendMessageServiceImpl implements MythSendMessageService {
@@ -43,6 +45,7 @@ public class MythSendMessageServiceImpl implements MythSendMessageService {
             try {
                 getMythMqSendService().sendMessage(mythParticipant.getDestination(), messageEntity);
             } catch (Exception e) {
+                log.error("please check myth.mq config");
                 return Boolean.FALSE;
             }
         }

@@ -24,6 +24,6 @@ public interface GoodsFacade {
 
     @ApiOperation("变更库存")
     @PostMapping("changeInventory")
-    @Myth(destination = "GID-TOPIC1")
+    @Myth(destination = "ORDER-MYTH", tags = "goods")
     void changeInventory(@RequestBody GoodsChangeDTO goodsChangeDTO);
 }

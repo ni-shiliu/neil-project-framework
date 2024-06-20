@@ -26,7 +26,7 @@ public interface UserFacade {
 
     @ApiOperation("注册用户")
     @PostMapping("registerUser")
-    @Myth(destination = "GID-TOPIC1")
+    @Myth(destination = "ORDER-MYTH", tags = "user")
     UserDTO registerUser(@RequestBody UserSaveDTO userSaveDTO);
 
 }

@@ -1,4 +1,4 @@
-package com.neil.myth.core.service.impl;
+package com.neil.myth.core.mq.service.impl;
 
 import cn.hutool.extra.spring.SpringUtil;
 import com.neil.myth.common.bean.context.MythTransactionContext;

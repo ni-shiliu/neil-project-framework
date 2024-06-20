@@ -31,7 +31,7 @@
     <aspectjweaver.version>1.8.9</aspectjweaver.version>
     <disruptor.version>3.4.0</disruptor.version>
     <kryo.version>4.0.0</kryo.version>
-    <rocketmq.version>4.1.0-incubating</rocketmq.version>
+    <rocketmq.version>5.2.0</rocketmq.version>
     <feign-core.version>8.18.0</feign-core.version>
     <rocketmq-spring-boot-starter.version>2.2.1</rocketmq-spring-boot-starter.version>
   </properties>

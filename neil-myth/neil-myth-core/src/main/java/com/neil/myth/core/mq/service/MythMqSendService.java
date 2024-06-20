@@ -1,4 +1,4 @@
-package com.neil.myth.core.service;
+package com.neil.myth.core.mq.service;
 
 import com.neil.myth.common.bean.mq.MessageEntity;
 

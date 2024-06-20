@@ -4,14 +4,18 @@ import com.neil.myth.common.bean.entity.MythInvocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author nihao
  * @date 2024/6/11
  */
 @Data
 @AllArgsConstructor
-public class MessageEntity {
+public class MessageEntity implements Serializable {
 
+
+    private static final long serialVersionUID = -5559013750264598612L;
 
     private String transId;
 
