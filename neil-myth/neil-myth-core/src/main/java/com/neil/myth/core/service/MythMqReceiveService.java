@@ -7,6 +7,6 @@ package com.neil.myth.core.service;
 @FunctionalInterface
 public interface MythMqReceiveService {
 
-    Boolean processMessage(byte[] message);
+    Boolean processMessage(byte[] message) throws Exception;
 
 }

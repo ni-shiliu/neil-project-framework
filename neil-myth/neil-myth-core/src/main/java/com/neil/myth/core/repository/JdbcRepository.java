@@ -4,6 +4,7 @@ import cn.hutool.core.lang.TypeReference;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.neil.myth.annotation.MythSPI;
+import com.neil.myth.common.bean.entity.MythInvocation;
 import com.neil.myth.common.bean.entity.MythParticipant;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.config.MythConfig;
@@ -11,6 +12,7 @@ import com.neil.myth.common.config.MythDbConfig;
 import com.neil.myth.common.enums.MythRoleEnum;
 import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.common.exception.MythException;
+import com.neil.myth.common.serializer.Serializer;
 import com.neil.myth.common.utils.RepositoryPathUtil;
 import com.neil.myth.common.utils.SqlUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -35,13 +37,21 @@ public class JdbcRepository implements MythRepository {
 
     private String tableName;
 
+    private Serializer serializer;
+
+    @Override
+    public void setSerializer(final Serializer serializer) {
+        this.serializer = serializer;
+    }
+
+
     @Override
     public int create(MythTransaction mythTransaction) {
         StringBuilder sql = new StringBuilder()
                 .append("insert into ")
                 .append(tableName)
-                .append("(trans_id, role, target_class, target_method, status, retry_count, participants, args, error_msg, gmt_created, gmt_modified)")
-                .append(" values(?,?,?,?,?,?,?,?,?,?,?)");
+                .append("(trans_id, role, target_class, target_method, status, retry_count, participants, args, invocation, error_msg, gmt_created, gmt_modified)")
+                .append(" values(?,?,?,?,?,?,?,?,?,?,?,?)");
         return executeUpdate(sql.toString(),
                 mythTransaction.getTransId(),
                 mythTransaction.getRole().name(),
@@ -51,6 +61,7 @@ public class JdbcRepository implements MythRepository {
                 mythTransaction.getRetryCount(),
                 JSONUtil.toJsonStr(mythTransaction.getParticipants()),
                 mythTransaction.getArgs(),
+                serializer.serialize(mythTransaction.getInvocation()),
                 mythTransaction.getErrorMsg(),
                 mythTransaction.getGmtCreated(),
                 mythTransaction.getGmtModified());
@@ -171,11 +182,20 @@ public class JdbcRepository implements MythRepository {
         mythTransaction.setGmtCreated(LocalDateTime.parse(map.get("gmt_created").toString()));
         mythTransaction.setGmtModified(LocalDateTime.parse(map.get("gmt_modified").toString()));
         mythTransaction.setStatus(MythStatusEnum.byCode(map.get("status").toString()));
-        mythTransaction.setRetryCount(Integer.valueOf(map.get("retry_count").toString()));
+        Object retryCountObject = map.get("retry_count");
+        if (Objects.nonNull(retryCountObject)) {
+            mythTransaction.setRetryCount(Integer.valueOf(retryCountObject.toString()));
+        }
         mythTransaction.setRole(MythRoleEnum.byCode(map.get("role").toString()));
         mythTransaction.setParticipants(JSONUtil.toBean(map.get("participants").toString(),
                 new TypeReference<List<MythParticipant>>() {}, false));
 
+        byte[] bytes = (byte[]) map.get("invocation");
+        try {
+            mythTransaction.setInvocation(serializer.deSerialize(bytes, MythInvocation.class));
+        } catch (MythException e) {
+            e.printStackTrace();
+        }
         return mythTransaction;
     }
 }

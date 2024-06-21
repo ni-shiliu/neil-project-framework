@@ -1,6 +1,6 @@
 package com.neil.project.api;
 
-import cn.hutool.json.JSONUtil;
+import com.neil.myth.annotation.Myth;
 import com.neil.project.goods.api.GoodsFacade;
 import com.neil.project.goods.dto.GoodsChangeDTO;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class GoodsController implements GoodsFacade {
 
     @Override
+    @Myth
     public void changeInventory(@RequestBody GoodsChangeDTO goodsChangeDTO) {
-        log.info("changeInventory success param: {}", JSONUtil.toJsonStr(goodsChangeDTO));
+        throw new RuntimeException("error le");
+
+//        log.info("changeInventory success param: {}", JSONUtil.toJsonStr(goodsChangeDTO));
     }
 
 }

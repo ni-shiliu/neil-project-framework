@@ -38,6 +38,7 @@ public class MythInitServiceImpl implements MythInitService {
         // spi repository and register
         final MythRepository mythRepository = MythSPIClassLoader.getMythSPIClassLoader(MythRepository.class)
                 .getActivateMythSPIClazz(mythConfig.getRepositorySupport());
+        mythRepository.setSerializer(serializer);
         SpringUtil.registerBean(MythRepository.class.getName(), mythRepository);
     }
 

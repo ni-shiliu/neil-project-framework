@@ -63,6 +63,8 @@ public class RocketMqConsumerConfig implements ApplicationListener<ContextRefres
                     final byte[] message = msg.getBody();
                     mythMqReceiveService.processMessage(message);
                 } catch (Exception e) {
+                    log.error("neil myth consumer process error");
+                    e.printStackTrace();
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER;
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

@@ -21,11 +21,7 @@ public class MythParticipant implements Serializable {
 
     private String status;
 
-    private String participantId;
-
     private String destination;
-
-    private Integer retriedCount;
 
     private MythInvocation mythInvocation;
 

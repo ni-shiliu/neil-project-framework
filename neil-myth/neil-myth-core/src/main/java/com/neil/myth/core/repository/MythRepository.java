@@ -4,6 +4,7 @@ import com.neil.myth.annotation.MythSPI;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.config.MythConfig;
 import com.neil.myth.common.exception.MythException;
+import com.neil.myth.common.serializer.Serializer;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.List;
  */
 @MythSPI
 public interface MythRepository {
+
+    void setSerializer(Serializer serializer);
 
     int create(MythTransaction mythTransaction);
 

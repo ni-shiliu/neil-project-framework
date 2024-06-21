@@ -1,6 +1,5 @@
 package com.neil.myth.core.service.impl;
 
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.neil.myth.annotation.Myth;
@@ -72,6 +71,8 @@ public class MythTransactionEngine {
         mythTransaction.setTargetClass(clazz.getName());
         mythTransaction.setTargetMethod(method.getName());
         mythTransaction.setArgs(JSONUtil.toJsonStr(args));
+        mythTransaction.setRetryCount(0);
+        mythTransaction.setInvocation(new MythInvocation(clazz, method.getName(), method.getParameterTypes(), args));
         return mythTransaction;
     }
 
@@ -128,13 +129,15 @@ public class MythTransactionEngine {
         currentTransaction.registerParticipant(generateMythParticipant(currentTransaction.getTransId(),
                 destination,
                 mythInvocation,
-                0,
                 status.name(),
                 message));
         publishEvent.publishEvent(currentTransaction, EventTypeEnum.UPDATE_PARTICIPANT);
     }
 
     public void actorTransaction(ProceedingJoinPoint point, MythTransactionContext mythTransactionContext) {
+        if (Strings.isBlank(mythTransactionContext.getTransId())) {
+            return;
+        }
         MythTransaction mythTransaction = generateMythTransaction(point, MythRoleEnum.PROVIDER, MythStatusEnum.BEGIN, mythTransactionContext.getTransId());
         publishEvent.publishEvent(mythTransaction, EventTypeEnum.SAVE);
         CURRENT.set(mythTransaction);
@@ -144,13 +147,11 @@ public class MythTransactionEngine {
     }
 
     private MythParticipant generateMythParticipant(String transId, String destination,
-                                                    MythInvocation mythInvocation, Integer retriedCount,
+                                                    MythInvocation mythInvocation,
                                                     String status, String message) {
         MythParticipant mythParticipant = new MythParticipant();
-        mythParticipant.setParticipantId(IdUtil.fastUUID());
         mythParticipant.setTransId(transId);
         mythParticipant.setDestination(destination);
-        mythParticipant.setRetriedCount(retriedCount);
         mythParticipant.setMythInvocation(mythInvocation);
         mythParticipant.setStatus(status);
         mythParticipant.setErrorMsg(message);

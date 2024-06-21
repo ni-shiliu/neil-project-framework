@@ -1,6 +1,7 @@
 package com.neil.myth.core.mq.service.impl;
 
 import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.json.JSONUtil;
 import com.neil.myth.common.bean.context.MythTransactionContext;
 import com.neil.myth.common.bean.entity.MythInvocation;
 import com.neil.myth.common.bean.entity.MythTransaction;
@@ -10,7 +11,6 @@ import com.neil.myth.common.config.MythConfig;
 import com.neil.myth.common.enums.EventTypeEnum;
 import com.neil.myth.common.enums.MythRoleEnum;
 import com.neil.myth.common.enums.MythStatusEnum;
-import com.neil.myth.common.exception.MythException;
 import com.neil.myth.common.serializer.Serializer;
 import com.neil.myth.core.event.MythTransactionEventPublisher;
 import com.neil.myth.core.service.MythCoordinatorService;
@@ -45,7 +45,7 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
     private static final Lock LOCK = new ReentrantLock();
 
     @Override
-    public Boolean processMessage(byte[] body) {
+    public Boolean processMessage(byte[] body) throws Exception {
         MessageEntity messageEntity = getObjectSerializer().deSerialize(body, MessageEntity.class);
         MythTransaction mythTransaction = mythCoordinatorService.findByTransId(messageEntity.getTransId());
         LOCK.lock();
@@ -60,7 +60,8 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
                 MythTransaction log = generateMythTransaction(messageEntity.getTransId(), getExceptionMessage(e),
                         MythStatusEnum.FAILURE,
                         messageEntity.getMythInvocation().getTargetClass().getName(),
-                        messageEntity.getMythInvocation().getMethodName());
+                        messageEntity.getMythInvocation().getMethodName(),
+                        messageEntity.getMythInvocation().getArgs());
                 publisher.publishEvent(log, EventTypeEnum.SAVE);
             } else {
                 mythTransaction.setErrorMsg(getExceptionMessage(e));
@@ -69,7 +70,7 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
                         : mythTransaction.getRetryCount()) + 1);
                 publisher.publishEvent(mythTransaction, EventTypeEnum.UPDATE_FAIR);
             }
-            throw new MythException(e);
+            throw e;
         } finally {
             TransactionContextLocal.getInstance().remove();
             LOCK.unlock();
@@ -82,11 +83,12 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
         final MythTransaction log = generateMythTransaction(messageEntity.getTransId(), null,
                 MythStatusEnum.COMMIT,
                 messageEntity.getMythInvocation().getTargetClass().getName(),
-                messageEntity.getMythInvocation().getMethodName());
+                messageEntity.getMythInvocation().getMethodName(),
+                messageEntity.getMythInvocation().getArgs());
         publisher.publishEvent(log, EventTypeEnum.SAVE);
     }
 
-    private MythTransaction generateMythTransaction(String transId, String errorMsg, MythStatusEnum status, String targetClass, String methodName) {
+    private MythTransaction generateMythTransaction(String transId, String errorMsg, MythStatusEnum status, String targetClass, String methodName, Object[] args) {
         MythTransaction logTransaction = new MythTransaction(transId);
         logTransaction.setStatus(status);
         logTransaction.setErrorMsg(errorMsg);
@@ -94,6 +96,7 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
         logTransaction.setTargetClass(targetClass);
         logTransaction.setTargetMethod(methodName);
         logTransaction.setRetryCount(1);
+        logTransaction.setArgs(JSONUtil.toJsonStr(args));
         return logTransaction;
     }
 

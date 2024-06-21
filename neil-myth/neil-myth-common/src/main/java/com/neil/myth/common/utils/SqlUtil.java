@@ -30,6 +30,7 @@ public class SqlUtil {
                                 "  `participants` text NULL COMMENT '参与者',\n" +
                                 "  `retry_count` int(3) NULL COMMENT '重试次数',\n" +
                                 "  `args` text NULL COMMENT '参数',\n" +
+                                "  `invocation` longblob NULL COMMENT '用作反射class',\n" +
                                 "  `error_msg` text NULL COMMENT '失败原因',\n" +
                                 "  `gmt_created` datetime NOT NULL COMMENT '创建时间',\n" +
                                 "  `gmt_modified` datetime NOT NULL COMMENT '更新时间',\n" +
