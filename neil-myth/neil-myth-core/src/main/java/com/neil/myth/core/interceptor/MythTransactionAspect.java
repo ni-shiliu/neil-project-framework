@@ -18,31 +18,12 @@ public class MythTransactionAspect {
 
     private final MythTransactionInterceptor mythTransactionInterceptor;
 
-    /**
-     * 事务开启者
-     */
     @Pointcut("@annotation(com.neil.myth.annotation.Myth)")
     public void mythInterceptor() {
 
     }
 
-    /**
-     * 事务producer
-     */
-    @Pointcut("@annotation(com.neil.myth.annotation.MythProducer)")
-    public void mythProducerInterceptor() {
-
-    }
-
-    /**
-     * 事务consumer
-     */
-    @Pointcut("@annotation(com.neil.myth.annotation.MythConsumer)")
-    public void mythConsumerInterceptor() {
-
-    }
-
-    @Around("mythInterceptor() || mythConsumerInterceptor() || mythProducerInterceptor()")
+    @Around("mythInterceptor()")
     public Object interceptMythAnnotationMethod(ProceedingJoinPoint proceedingJoinPoint) throws  Throwable {
         return mythTransactionInterceptor.interceptor(proceedingJoinPoint);
     }
