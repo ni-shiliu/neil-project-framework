@@ -1,7 +1,6 @@
 package com.neil.project.api;
 
 import cn.hutool.json.JSONUtil;
-import com.neil.myth.annotation.MythConsumer;
 import com.neil.project.user.api.UserFacade;
 import com.neil.project.user.dto.UserDTO;
 import com.neil.project.user.dto.UserSaveDTO;
@@ -26,7 +25,6 @@ public class UserController implements UserFacade {
     }
 
     @Override
-    @MythConsumer
     public UserDTO registerUser(@RequestBody UserSaveDTO userSaveDTO) {
         log.info("registerUser success param: {}", JSONUtil.toJsonStr(userSaveDTO));
         return null;

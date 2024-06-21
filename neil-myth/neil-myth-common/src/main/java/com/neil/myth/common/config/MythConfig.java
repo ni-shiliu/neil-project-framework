@@ -34,6 +34,8 @@ public class MythConfig {
 
     private int retryMax = 3;
 
+    private int consumeMessageBatchMaxSize = 1;
+
     private int consumerThreads = Runtime.getRuntime().availableProcessors() << 1;
 
     private Mq mq;
@@ -41,7 +43,7 @@ public class MythConfig {
     @Data
     @Configuration
     @ConfigurationProperties(prefix = "neil.myth.mq")
-    static class Mq {
+    public static class Mq {
 
         private Rocketmq rocketmq;
     }
@@ -49,7 +51,7 @@ public class MythConfig {
     @Data
     @Configuration
     @ConfigurationProperties(prefix = "neil.myth.mq.rocketmq")
-    static class Rocketmq {
+    public static class Rocketmq {
 
         private Boolean producerEnabled;
 
@@ -60,6 +62,8 @@ public class MythConfig {
         private String consumerTopic;
 
         private String consumerGroup;
+
+        private String consumerTag;
     }
 
 
