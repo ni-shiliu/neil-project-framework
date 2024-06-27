@@ -6,18 +6,24 @@ spring:
   profiles:
     active: test
 
+  data:
+    mongodb:
+      uri: mongodb://neil_myth:123456@localhost:27017/neil_myth
+      auto-index-creation: true
+
 neil:
   myth:
     enabled: true
-    myth-db-config:
-      url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
-      username: root
-      password: 123456
+    repository-support: mongodb
     mq:
       rocketmq:
         consumer-enabled: true
         consumer-topic: MYTH-GOODS
         consumer-group: MYTH-GOODS-GROUP
+    myth-mongo-db-config:
+      mongo-db-name: neil_myth
+      mongo-url: mongodb://neil_myth:123456@localhost:27017/neil_myth
+
 
 rocketmq:
   name-server: localhost:9876

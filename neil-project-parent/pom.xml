@@ -24,6 +24,7 @@
     <guava.version>31.0.1-jre</guava.version>
     <neil.myth.version>1.0.0-SNAPSHOT</neil.myth.version>
     <druid.version>1.0.29</druid.version>
+    <mongo.driver.version>4.2.3</mongo.driver.version>
 
   </properties>
 
@@ -89,6 +90,12 @@
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>${mongo.driver.version}</version>
       </dependency>
 
     </dependencies>

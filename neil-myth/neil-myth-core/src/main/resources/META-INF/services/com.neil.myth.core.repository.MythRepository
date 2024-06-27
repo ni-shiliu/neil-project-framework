@@ -1,1 +1,2 @@
 com.neil.myth.core.repository.JdbcRepository
+com.neil.myth.core.repository.MongoRepository

@@ -24,11 +24,13 @@ public class MythConfig {
     private String serializer = "kryo";
 
     /**
-     * 数据存储类型，db
+     * 数据存储类型，db / mongodb
      */
     private String repositorySupport = "db";
 
     private MythDbConfig mythDbConfig;
+
+    private MythMongoDbConfig mythMongoDbConfig;
 
     private int bufferSize = 4096;
 

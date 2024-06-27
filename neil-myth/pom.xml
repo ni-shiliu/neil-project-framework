@@ -33,6 +33,9 @@
         <rocketmq.version>5.2.0</rocketmq.version>
         <feign-core.version>8.18.0</feign-core.version>
         <rocketmq-spring-boot-starter.version>2.2.1</rocketmq-spring-boot-starter.version>
+        <mongo.driver.version>4.2.3</mongo.driver.version>
+        <spring.data.mongodb.version>3.3.5</spring.data.mongodb.version>
+
     </properties>
 
     <dependencyManagement>
@@ -89,6 +92,18 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-spring-boot-starter</artifactId>
                 <version>${rocketmq-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>${mongo.driver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-mongodb</artifactId>
+                <version>${spring.data.mongodb.version}</version>
             </dependency>
 
         </dependencies>

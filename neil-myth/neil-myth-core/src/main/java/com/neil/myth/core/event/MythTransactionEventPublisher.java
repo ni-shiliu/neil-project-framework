@@ -62,7 +62,7 @@ public class MythTransactionEventPublisher implements DisposableBean, Applicatio
 
         MythTransactionEventHandler[] consumers = new MythTransactionEventHandler[MAX_THREAD];
         for (int i = 0; i < threadSize; i++) {
-            consumers[i] = new MythTransactionEventHandler(mythCoordinatorService, executor);
+            consumers[i] = new MythTransactionEventHandler(mythCoordinatorService, executor, this);
         }
         disruptor.handleEventsWithWorkerPool(consumers);
         disruptor.setDefaultExceptionHandler(new IgnoreExceptionHandler());

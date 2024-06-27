@@ -61,7 +61,7 @@ public class JdbcRepository implements MythRepository {
                 mythTransaction.getRetryCount(),
                 JSONUtil.toJsonStr(mythTransaction.getParticipants()),
                 mythTransaction.getArgs(),
-                serializer.serialize(mythTransaction.getInvocation()),
+                Objects.nonNull(mythTransaction.getInvocation()) ? serializer.serialize(mythTransaction.getInvocation()) : null,
                 mythTransaction.getErrorMsg(),
                 mythTransaction.getGmtCreated(),
                 mythTransaction.getGmtModified());
@@ -192,7 +192,9 @@ public class JdbcRepository implements MythRepository {
 
         byte[] bytes = (byte[]) map.get("invocation");
         try {
-            mythTransaction.setInvocation(serializer.deSerialize(bytes, MythInvocation.class));
+            if (Objects.nonNull(bytes)) {
+                mythTransaction.setInvocation(serializer.deSerialize(bytes, MythInvocation.class));
+            }
         } catch (MythException e) {
             e.printStackTrace();
         }

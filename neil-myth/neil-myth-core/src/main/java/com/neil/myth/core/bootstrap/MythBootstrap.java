@@ -26,6 +26,7 @@ public class MythBootstrap implements ApplicationContextAware {
         try {
             this.init();
         } catch (Exception e) {
+            e.printStackTrace();
             log.error("Myth init fail: {}", e.getMessage());
             throw e;
         }
