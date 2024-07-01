@@ -1,5 +1,9 @@
 # neil-project-framework
 
+## Neil-Myth
+分布式事务解决方案，利用MQ实现事务最终一致性
+文档：[Neil-Myth](neil-myth%2FREADME.md)
+
 ## 应用架构
 
 ![img.png](img.png)
@@ -48,6 +52,8 @@
 1. order-client：对外api层
 2. order-app：业务处理层，包含**service**、**schedule**、**message**
 3. order-infra：基础设施层，包含**config**、**mapper**、**gateway**
+
+
 
 
 

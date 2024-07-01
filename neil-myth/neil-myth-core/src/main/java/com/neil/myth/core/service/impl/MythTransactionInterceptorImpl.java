@@ -34,6 +34,7 @@ public class MythTransactionInterceptorImpl implements MythTransactionIntercepto
             mythTransactionContext = new MythTransactionContext();
         } else {
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
+            // 获取请求头 MYTH_TRANSACTION_CONTEXT
             mythTransactionContext = RpcMediator.getInstance().acquire(request::getHeader);
         }
         return mythTransactionAspectService.invoke(mythTransactionContext, pjp);
