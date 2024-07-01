@@ -22,7 +22,7 @@
     <spring-cloud.version>2020.0.4</spring-cloud.version>
     <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
     <guava.version>31.0.1-jre</guava.version>
-    <neil.myth.version>1.0.0-SNAPSHOT</neil.myth.version>
+    <neil.myth.version>1.0.0</neil.myth.version>
     <druid.version>1.0.29</druid.version>
     <mongo.driver.version>4.2.3</mongo.driver.version>
 
