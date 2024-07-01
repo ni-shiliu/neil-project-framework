@@ -408,7 +408,32 @@ public class ActorMythTransactionHandler implements MythTransactionHandler {
 }
 ```
 
-### consumer补偿入口
+### producer入口
+
+```java
+@Configuration
+@ConditionalOnProperty(prefix = "neil.myth.mq.rocketmq", name = "producer-enabled", havingValue = "true")
+public class RocketmqConfig {
+
+    @Value("${rocketmq.name-server}")
+    private String nameServer;
+
+    @Value("${neil.myth.mq.rocketmq.producer-group}")
+    private String producerGroup;
+
+    @Bean
+    public RocketMQTemplate rocketMQTemplate() {
+        RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
+        DefaultMQProducer defaultMQProducer = new DefaultMQProducer(producerGroup);
+        defaultMQProducer.setNamesrvAddr(nameServer);
+        rocketMQTemplate.setProducer(defaultMQProducer);
+        return rocketMQTemplate;
+    }
+
+}
+```
+
+### consumer入口
 
 ```java
 @Service
