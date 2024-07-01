@@ -1,4 +1,4 @@
-# NEIL-MYTH(Make Your Transactional Happen)
+# NEIL-MYTH（Make Your Transactional Happen）
 
 利用MQ实现分布式事务（最终一致）
 
