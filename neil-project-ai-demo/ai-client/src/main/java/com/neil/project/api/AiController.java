@@ -1,4 +1,4 @@
-package com.neil.project.ai.api;
+package com.neil.project.api;
 
 import com.neil.project.ai.AiFacade;
 import lombok.RequiredArgsConstructor;
