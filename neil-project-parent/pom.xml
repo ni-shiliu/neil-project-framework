@@ -1,152 +1,180 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.5.5</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
-  <groupId>com.neil.project</groupId>
-  <artifactId>neil-project-parent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>com.neil.project</groupId>
+    <artifactId>neil-project-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <properties>
-    <neil.project.share.version>1.0.0-SNAPSHOT</neil.project.share.version>
-    <spring-cloud-starter-openfeign.version>2.2.9.RELEASE</spring-cloud-starter-openfeign.version>
-    <hutool-all.version>5.7.13</hutool-all.version>
-    <knife4j-spring-boot-starter.version>4.4.0</knife4j-spring-boot-starter.version>
-    <spring-cloud.version>2020.0.4</spring-cloud.version>
-    <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
-    <guava.version>31.0.1-jre</guava.version>
-    <neil.myth.version>1.0.0</neil.myth.version>
-    <druid.version>1.0.29</druid.version>
-    <mongo.driver.version>4.2.3</mongo.driver.version>
+    <properties>
+        <neil.project.share.version>1.0.0-SNAPSHOT</neil.project.share.version>
+        <spring-cloud-starter-openfeign.version>2.2.9.RELEASE</spring-cloud-starter-openfeign.version>
+        <hutool-all.version>5.7.13</hutool-all.version>
+        <knife4j-spring-boot-starter.version>4.4.0</knife4j-spring-boot-starter.version>
+        <spring-cloud.version>2020.0.4</spring-cloud.version>
+        <mybatis-plus-boot-starter.version>3.4.3.4</mybatis-plus-boot-starter.version>
+        <guava.version>31.0.1-jre</guava.version>
+        <neil.myth.version>1.0.0</neil.myth.version>
+        <druid.version>1.0.29</druid.version>
+        <mongo.driver.version>4.2.3</mongo.driver.version>
+        <spring.ai.version>1.0.0-SNAPSHOT</spring.ai.version>
 
-  </properties>
+    </properties>
 
-  <dependencyManagement>
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.neil.project</groupId>
+                <artifactId>neil-project-share</artifactId>
+                <version>${neil.project.share.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-openfeign-core</artifactId>
+                <version>${spring-cloud-starter-openfeign.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-starter-openfeign.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+                <version>${knife4j-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>neil-project-myth</groupId>
+                <artifactId>neil-myth-spring-boot-starter</artifactId>
+                <version>${neil.myth.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>${mongo.driver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring.ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
-      <dependency>
-        <groupId>com.neil.project</groupId>
-        <artifactId>neil-project-share</artifactId>
-        <version>${neil.project.share.version}</version>
-      </dependency>
+        <!-- 公共依赖，请谨慎添加 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${spring-cloud.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-openfeign-core</artifactId>
-        <version>${spring-cloud-starter-openfeign.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>com.neil.project</groupId>
+            <artifactId>neil-project-share</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-openfeign</artifactId>
-        <version>${spring-cloud-starter-openfeign.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>cn.hutool</groupId>
-        <artifactId>hutool-all</artifactId>
-        <version>${hutool-all.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>com.github.xiaoymin</groupId>
-        <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-        <version>${knife4j-spring-boot-starter.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>com.baomidou</groupId>
-        <artifactId>mybatis-plus-boot-starter</artifactId>
-        <version>${mybatis-plus-boot-starter.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${guava.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>neil-project-myth</groupId>
-        <artifactId>neil-myth-spring-boot-starter</artifactId>
-        <version>${neil.myth.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>com.alibaba</groupId>
-        <artifactId>druid</artifactId>
-        <version>${druid.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.mongodb</groupId>
-        <artifactId>mongodb-driver-sync</artifactId>
-        <version>${mongo.driver.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
 
     </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <!-- 公共依赖，请谨慎添加 -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.neil.project</groupId>
-      <artifactId>neil-project-share</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-openfeign-core</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-openfeign</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>cn.hutool</groupId>
-      <artifactId>hutool-all</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.xiaoymin</groupId>
-      <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-    </dependency>
-
-  </dependencies>
 </project>
