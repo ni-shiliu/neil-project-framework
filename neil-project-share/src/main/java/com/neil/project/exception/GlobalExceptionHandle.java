@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -40,21 +39,20 @@ import static com.neil.project.exception.ErrorCode.*;
 @RestControllerAdvice
 public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
 
-
-    /**
-     * 请求体无法被解析成目标对象
-     */
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         BaseResult<Object> errorResult = buildErrorResult(HTTP_MESSAGE_NOT_READABLE, null);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
     }
 
+    /**
+     * 请求体无法被解析成目标对象
+     */
+
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
                                                                          HttpHeaders headers,
-                                                                         HttpStatus status,
+                                                                         HttpStatusCode status,
                                                                          WebRequest request) {
         Set<HttpMethod> supportedMethods = ex.getSupportedHttpMethods();
         if (!CollectionUtils.isEmpty(supportedMethods)) {
@@ -67,7 +65,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
                                                                      HttpHeaders headers,
-                                                                     HttpStatus status,
+                                                                     HttpStatusCode status,
                                                                      WebRequest request) {
         List<MediaType> mediaTypes = ex.getSupportedMediaTypes();
         if (!CollectionUtils.isEmpty(mediaTypes)) {
@@ -80,7 +78,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex,
                                                                       HttpHeaders headers,
-                                                                      HttpStatus status,
+                                                                      HttpStatusCode status,
                                                                       WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(NOT_ACCEPTABLE);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -89,7 +87,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex,
                                                                HttpHeaders headers,
-                                                               HttpStatus status,
+                                                               HttpStatusCode status,
                                                                WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(MISSING_PATH_VARIABLE);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -98,7 +96,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
                                                                           HttpHeaders headers,
-                                                                          HttpStatus status,
+                                                                          HttpStatusCode status,
                                                                           WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(MISSING_SERVLET_REQUEST_PARAMETER);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -107,7 +105,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleServletRequestBindingException(ServletRequestBindingException ex,
                                                                           HttpHeaders headers,
-                                                                          HttpStatus status,
+                                                                          HttpStatusCode status,
                                                                           WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(SERVLET_REQUEST_BINDING_EXCEPTION);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -116,7 +114,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleConversionNotSupported(ConversionNotSupportedException ex,
                                                                   HttpHeaders headers,
-                                                                  HttpStatus status,
+                                                                  HttpStatusCode status,
                                                                   WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(CONVERSION_NOT_SUPPORTED);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -125,7 +123,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex,
                                                         HttpHeaders headers,
-                                                        HttpStatus status,
+                                                        HttpStatusCode status,
                                                         WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(TYPE_MISMATCH);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -134,7 +132,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
                                                                   HttpHeaders headers,
-                                                                  HttpStatus status,
+                                                                  HttpStatusCode status,
                                                                   WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(HTTP_MESSAGE_NOT_WRITEABLE);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -143,7 +141,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestPart(MissingServletRequestPartException ex,
                                                                      HttpHeaders headers,
-                                                                     HttpStatus status,
+                                                                     HttpStatusCode status,
                                                                      WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(MISSING_SERVLET_REQUEST_PART);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -152,7 +150,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex,
                                                                    HttpHeaders headers,
-                                                                   HttpStatus status,
+                                                                   HttpStatusCode status,
                                                                    WebRequest request) {
         BaseResult<Void> errorResult = buildErrorResult(NO_HANDLER_FOUND);
         return handleExceptionInternal(ex, errorResult, headers, status, request);
@@ -161,7 +159,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleAsyncRequestTimeoutException(AsyncRequestTimeoutException ex,
                                                                         HttpHeaders headers,
-                                                                        HttpStatus status,
+                                                                        HttpStatusCode status,
                                                                         WebRequest webRequest) {
         BaseResult<Void> errorResult = buildErrorResult(ASYNC_REQUEST_TIMEOUT);
         return handleExceptionInternal(ex, errorResult, headers, status, webRequest);
@@ -171,7 +169,7 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
             HttpHeaders headers,
-            HttpStatus status,
+            HttpStatusCode status,
             WebRequest request) {
 
         List<String> errors = new ArrayList<>();
@@ -201,11 +199,6 @@ public class GlobalExceptionHandle extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResult, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<Object> maxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
-        BaseResult<Void> errorResult = buildErrorResult(FILE_MAX_UPLOAD_SIZE_EXCEEDED);
-        return new ResponseEntity<>(errorResult, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Object> illegalArgumentException(IllegalArgumentException ex) {

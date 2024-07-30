@@ -3,13 +3,13 @@ package com.neil.project.middleware.service;
 import cn.hutool.core.collection.CollUtil;
 import com.neil.project.middleware.dto.SpringMailSendAttachmentDTO;
 import com.neil.project.middleware.dto.SpringSendMailDTO;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.util.Objects;
 
 /**

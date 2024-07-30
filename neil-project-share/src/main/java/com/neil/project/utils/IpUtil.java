@@ -1,6 +1,7 @@
 package com.neil.project.utils;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;

@@ -1,7 +1,7 @@
 package com.neil.project.order.dto;
 
 import com.neil.project.common.BaseDTO;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -16,13 +16,13 @@ import lombok.experimental.Accessors;
 public class OrderDTO extends BaseDTO {
 
 
-    @ApiModelProperty("订单号")
+    @Schema(description = "订单号")
     private String orderNo;
 
-    @ApiModelProperty("用户id")
+    @Schema(description = "用户id")
     private Long userId;
 
-    @ApiModelProperty("用户名")
+    @Schema(description = "用户名")
     private String userName;
 
 }

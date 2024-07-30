@@ -1,38 +1,56 @@
 package com.neil.project.config;
 
+import cn.hutool.core.util.RandomUtil;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springdoc.core.customizers.GlobalOpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author nihao
  * @date 2024/5/16
  */
 @Configuration
-@EnableSwagger2WebMvc
 public class Knife4jConfig {
 
-    @Bean(value = "defaultApi2")
-    public Docket defaultApi2() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(new ApiInfoBuilder()
-                        .description("neil-project-framework API")
-                        .contact("nh804117922@163.com")
-                        .version("1.0.0")
-                        .build())
-                //分组名称
-                .groupName("2.X版本")
-                .select()
-                //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-                .paths(PathSelectors.any())
-                .build();
+    /**
+     * 根据@Tag 上的排序，写入x-order
+     *
+     * @return the global open api customizer
+     */
+    @Bean
+    public GlobalOpenApiCustomizer orderGlobalOpenApiCustomizer() {
+        return openApi -> {
+            if (openApi.getTags()!=null){
+                openApi.getTags().forEach(tag -> {
+                    Map<String,Object> map=new HashMap<>();
+                    map.put("x-order", RandomUtil.randomInt(0,100));
+                    tag.setExtensions(map);
+                });
+            }
+            if(openApi.getPaths()!=null){
+                openApi.addExtension("x-test123","333");
+                openApi.getPaths().addExtension("x-abb",RandomUtil.randomInt(1,100));
+            }
+
+        };
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("NEIL-PROJECT-API")
+                        .version("1.0")
+
+                        .description( "服务接口文档")
+                        .license(new License().name("Apache 2.0")
+                                .url("http://doc.xiaominfo.com")));
     }
 
 }
