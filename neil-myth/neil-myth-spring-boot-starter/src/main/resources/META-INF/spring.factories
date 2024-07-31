@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.neil.myth.MythAutoConfiguration
+com.neil.myth.starter.MythAutoConfiguration

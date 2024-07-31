@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO createOrder(OrderSaveDTO orderSaveDTO) {
         goodsGateway.changeInventory(new GoodsChangeDTO().setGoodsId("1122"));
         userGateway.registerUser(new UserSaveDTO().setUserName("neil"));
-        return null;
+        return new OrderDTO();
     }
 
 }

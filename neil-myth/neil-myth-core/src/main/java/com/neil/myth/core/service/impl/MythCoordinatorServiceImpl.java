@@ -1,10 +1,10 @@
 package com.neil.myth.core.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.config.MythConfig;
 import com.neil.myth.common.exception.MythException;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.repository.MythRepository;
 import com.neil.myth.core.service.MythApplicationService;
 import com.neil.myth.core.service.MythCoordinatorService;
@@ -28,7 +28,7 @@ public class MythCoordinatorServiceImpl implements MythCoordinatorService {
 
     @Override
     public void init(MythConfig mythConfig) throws MythException {
-        mythRepository = SpringUtil.getBean(MythRepository.class);
+        mythRepository = SpringBeanUtil.getInstance().getBean(MythRepository.class);
         final String repositorySuffix = getRepositorySuffix(mythConfig.getRepositorySuffix());
         mythRepository.init(repositorySuffix, mythConfig);
     }

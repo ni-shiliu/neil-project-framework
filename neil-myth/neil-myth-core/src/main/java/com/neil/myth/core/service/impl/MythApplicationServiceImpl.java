@@ -1,7 +1,7 @@
 package com.neil.myth.core.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.extra.spring.SpringUtil;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.service.MythApplicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class MythApplicationServiceImpl implements MythApplicationService {
 
     @Override
     public String getApplicationName() {
-        return Optional.ofNullable(SpringUtil.getApplicationName()).orElse(generateDefaultApplicationName());
+        return Optional.ofNullable(SpringBeanUtil.getInstance().getApplicationName()).orElse(generateDefaultApplicationName());
     }
 
     private String generateDefaultApplicationName() {

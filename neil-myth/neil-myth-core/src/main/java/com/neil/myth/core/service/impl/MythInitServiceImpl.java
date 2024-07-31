@@ -1,9 +1,9 @@
 package com.neil.myth.core.service.impl;
 
-import cn.hutool.extra.spring.SpringUtil;
 import com.neil.myth.common.config.MythConfig;
 import com.neil.myth.common.loader.MythSPIClassLoader;
 import com.neil.myth.common.serializer.Serializer;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.repository.MythRepository;
 import com.neil.myth.core.service.MythCoordinatorService;
 import com.neil.myth.core.service.MythInitService;
@@ -33,13 +33,13 @@ public class MythInitServiceImpl implements MythInitService {
         // spi serializer and register
         final Serializer serializer = MythSPIClassLoader.getMythSPIClassLoader(Serializer.class)
                 .getActivateMythSPIClazz(mythConfig.getSerializer());
-        SpringUtil.registerBean(Serializer.class.getName(), serializer);
+        SpringBeanUtil.getInstance().registerBean(Serializer.class.getName(), serializer);
 
         // spi repository and register
         final MythRepository mythRepository = MythSPIClassLoader.getMythSPIClassLoader(MythRepository.class)
                 .getActivateMythSPIClazz(mythConfig.getRepositorySupport());
         mythRepository.setSerializer(serializer);
-        SpringUtil.registerBean(MythRepository.class.getName(), mythRepository);
+        SpringBeanUtil.getInstance().registerBean(MythRepository.class.getName(), mythRepository);
     }
 
 }

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.5</version>
+        <version>3.3.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,7 +23,7 @@
     </modules>
 
     <properties>
-        <hutool-all.version>5.7.13</hutool-all.version>
+        <hutool-all.version>5.8.29</hutool-all.version>
         <guava.version>31.0.1-jre</guava.version>
         <druid.version>1.0.29</druid.version>
         <mysql-connector-java.version>8.0.26</mysql-connector-java.version>
@@ -33,8 +33,8 @@
         <rocketmq.version>5.2.0</rocketmq.version>
         <feign-core.version>8.18.0</feign-core.version>
         <rocketmq-spring-boot-starter.version>2.2.1</rocketmq-spring-boot-starter.version>
-        <mongo.driver.version>4.2.3</mongo.driver.version>
-        <spring.data.mongodb.version>3.3.5</spring.data.mongodb.version>
+        <mongo.driver.version>5.0.0</mongo.driver.version>
+        <spring.data.mongodb.version>4.3.0</spring.data.mongodb.version>
 
     </properties>
 

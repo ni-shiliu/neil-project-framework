@@ -1,8 +1,8 @@
 package com.neil.myth.core.mq.rocketmq.config;
 
-import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.neil.myth.common.config.MythConfig;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.service.MythMqReceiveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +73,7 @@ public class RocketMqConsumerConfig implements ApplicationListener<ContextRefres
         } catch (MQClientException e) {
             throw new RuntimeException(e);
         }
-        SpringUtil.registerBean(consumer.getClass().getName(), consumer);
+        SpringBeanUtil.getInstance().registerBean(consumer.getClass().getName(), consumer);
     }
 
 }

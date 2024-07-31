@@ -1,11 +1,11 @@
 package com.neil.myth.core.mq.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import com.neil.myth.common.bean.entity.MythParticipant;
 import com.neil.myth.common.bean.entity.MythTransaction;
 import com.neil.myth.common.bean.mq.MessageEntity;
 import com.neil.myth.common.enums.MythStatusEnum;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.mq.service.MythMqSendService;
 import com.neil.myth.core.mq.service.MythSendMessageService;
 import lombok.RequiredArgsConstructor;
@@ -56,7 +56,7 @@ public class MythSendMessageServiceImpl implements MythSendMessageService {
         if (mythMqSendService == null) {
             synchronized (MythSendMessageServiceImpl.class) {
                 if (mythMqSendService == null) {
-                    mythMqSendService = SpringUtil.getBean(MythMqSendService.class);
+                    mythMqSendService = SpringBeanUtil.getInstance().getBean(MythMqSendService.class);
                 }
             }
         }

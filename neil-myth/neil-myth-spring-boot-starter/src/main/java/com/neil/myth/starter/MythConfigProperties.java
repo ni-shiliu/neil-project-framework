@@ -1,4 +1,4 @@
-package com.neil.myth;
+package com.neil.myth.starter;
 
 import com.neil.myth.common.config.MythConfig;
 import org.springframework.context.annotation.Configuration;

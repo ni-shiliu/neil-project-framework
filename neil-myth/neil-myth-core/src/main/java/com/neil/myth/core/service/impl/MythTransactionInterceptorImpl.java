@@ -4,6 +4,7 @@ import com.neil.myth.common.bean.context.MythTransactionContext;
 import com.neil.myth.core.interceptor.MythTransactionInterceptor;
 import com.neil.myth.core.mediator.RpcMediator;
 import com.neil.myth.core.service.MythTransactionAspectService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,6 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**

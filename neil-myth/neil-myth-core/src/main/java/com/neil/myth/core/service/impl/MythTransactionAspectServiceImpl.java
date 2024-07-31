@@ -1,7 +1,7 @@
 package com.neil.myth.core.service.impl;
 
-import cn.hutool.extra.spring.SpringUtil;
 import com.neil.myth.common.bean.context.MythTransactionContext;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.handle.MythTransactionHandler;
 import com.neil.myth.core.service.MythTransactionAspectService;
 import com.neil.myth.core.service.MythTransactionFactoryService;
@@ -24,7 +24,7 @@ public class MythTransactionAspectServiceImpl implements MythTransactionAspectSe
     @Override
     public Object invoke(MythTransactionContext mythTransactionContext, ProceedingJoinPoint point) throws Throwable {
         Class clazz = mythTransactionFactoryService.factoryOf(mythTransactionContext);
-        MythTransactionHandler mythTransactionHandler = (MythTransactionHandler) SpringUtil.getBean(clazz);
+        MythTransactionHandler mythTransactionHandler = (MythTransactionHandler) SpringBeanUtil.getInstance().getBean(clazz);
         return mythTransactionHandler.handler(point, mythTransactionContext);
     }
 

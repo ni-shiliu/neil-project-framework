@@ -1,10 +1,10 @@
 package com.neil.myth.core.mq.rocketmq.service;
 
-import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.neil.myth.common.bean.mq.MessageEntity;
 import com.neil.myth.common.exception.MythException;
 import com.neil.myth.common.serializer.Serializer;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.mq.service.MythMqSendService;
 import com.neil.myth.core.mq.service.impl.MythSendMessageServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +46,7 @@ public class RocketmqSendServiceImpl implements MythMqSendService {
         if (serializer == null) {
             synchronized (MythSendMessageServiceImpl.class) {
                 if (serializer == null) {
-                    serializer = SpringUtil.getBean(Serializer.class);
+                    serializer = SpringBeanUtil.getInstance().getBean(Serializer.class);
                 }
             }
         }

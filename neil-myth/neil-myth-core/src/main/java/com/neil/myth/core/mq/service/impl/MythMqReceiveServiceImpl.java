@@ -1,6 +1,5 @@
 package com.neil.myth.core.mq.service.impl;
 
-import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.neil.myth.common.bean.context.MythTransactionContext;
 import com.neil.myth.common.bean.entity.MythInvocation;
@@ -12,6 +11,7 @@ import com.neil.myth.common.enums.EventTypeEnum;
 import com.neil.myth.common.enums.MythRoleEnum;
 import com.neil.myth.common.enums.MythStatusEnum;
 import com.neil.myth.common.serializer.Serializer;
+import com.neil.myth.common.utils.SpringBeanUtil;
 import com.neil.myth.core.event.MythTransactionEventPublisher;
 import com.neil.myth.core.service.MythCoordinatorService;
 import com.neil.myth.core.service.MythMqReceiveService;
@@ -134,7 +134,7 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
         String method = mythInvocation.getMethodName();
         Object[] args = mythInvocation.getArgs();
         Class[] parameterTypes = mythInvocation.getParameterTypes();
-        Object bean = SpringUtil.getBean(clazz);
+        Object bean = SpringBeanUtil.getInstance().getBean(clazz);
         MethodUtils.invokeMethod(bean, method, args, parameterTypes);
     }
 
@@ -150,7 +150,7 @@ public class MythMqReceiveServiceImpl implements MythMqReceiveService {
         if (serializer == null) {
             synchronized (MythSendMessageServiceImpl.class) {
                 if (serializer == null) {
-                    serializer = SpringUtil.getBean(Serializer.class);
+                    serializer = SpringBeanUtil.getInstance().getBean(Serializer.class);
                 }
             }
         }

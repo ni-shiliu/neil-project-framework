@@ -1,4 +1,4 @@
-package com.neil.myth;
+package com.neil.myth.starter;
 
 import com.neil.myth.core.bootstrap.MythBootstrap;
 import com.neil.myth.core.service.MythInitService;
