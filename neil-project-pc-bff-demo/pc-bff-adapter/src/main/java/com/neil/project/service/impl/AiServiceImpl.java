@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author nihao
  * @date 2024/8/13
@@ -28,8 +30,14 @@ public class AiServiceImpl implements AiService {
                 .accept(MediaType.TEXT_EVENT_STREAM)
                 .retrieve()
                 .bodyToFlux(String.class);
+        AtomicInteger wordsSize = new AtomicInteger();
         flux.subscribe(
                 content -> {
+                    wordsSize.getAndIncrement();
+                    if (wordsSize.get() > 20) {
+                        System.out.println();
+                        wordsSize.set(0);
+                    }
                     System.out.print(content + " ");
                 }
         );
