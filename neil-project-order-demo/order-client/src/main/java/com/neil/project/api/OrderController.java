@@ -8,7 +8,6 @@ import com.neil.project.order.dto.OrderQueryDTO;
 import com.neil.project.order.dto.OrderSaveDTO;
 import com.neil.project.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

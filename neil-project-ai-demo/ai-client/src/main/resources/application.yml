@@ -1,0 +1,15 @@
+server:
+  port: 8093
+spring:
+  application:
+    name: neil-project-ai
+  profiles:
+    active: test
+  ai:
+    ollama:
+      chat:
+        model: llama3
+
+
+
+
