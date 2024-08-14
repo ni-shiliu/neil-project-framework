@@ -14,9 +14,7 @@ import org.springframework.ai.model.Media;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.api.OllamaApi;
 import org.springframework.ai.ollama.api.OllamaOptions;
-import org.springframework.http.MediaType;
 import org.springframework.util.MimeTypeUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,8 +31,8 @@ public class ChatController implements AiFacade {
 
     private final ChatClient chatClient;
 
-
     private final StreamingChatModel streamingChatModel;
+
     public ChatController(ChatClient.Builder chatClientBuilder, StreamingChatModel streamingChatModel) {
         this.chatClient = chatClientBuilder.build();
         this.streamingChatModel = streamingChatModel;
@@ -42,17 +40,13 @@ public class ChatController implements AiFacade {
 
     @Override
     @Operation(summary = "chat")
-    @GetMapping("/chat")
-    public String generation(String userInput) {
-        return this.chatClient.prompt()
-                .user(userInput)
-                .call()
-                .content();
+    public String chat(@RequestParam("text") String text) {
+        Prompt prompt = new Prompt(new UserMessage(text));
+        return this.chatClient.prompt(prompt).call().content();
     }
 
     @Operation(summary = "streamChat")
     @Override
-    @GetMapping(value = "/streamChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> streamChat(@RequestParam("text") String text) {
         return streamingChatModel.stream(text);
     }

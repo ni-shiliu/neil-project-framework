@@ -1,5 +1,6 @@
 package com.neil.project.service.impl;
 
+import com.neil.project.ai.AiFacade;
 import com.neil.project.ai.NeilPromptDTO;
 import com.neil.project.service.AiService;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,17 @@ public class AiServiceImpl implements AiService {
 
     private final WebClient webClient;
 
+    private final AiFacade aiFacade;
+
+    @Override
+    public String chat(String text) {
+        return aiFacade.chat(text);
+    }
+
     @Override
     public void streamChat(String text) {
         Flux<String> flux = webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("streamChat")
+                .uri(uriBuilder -> uriBuilder.path("/v1/streamChat")
                         .queryParam("text", text)
                         .build())
                 .accept(MediaType.TEXT_EVENT_STREAM)
@@ -40,7 +48,7 @@ public class AiServiceImpl implements AiService {
         flux.subscribe(
                 content -> {
                     contentSize.getAndAdd(content.length());
-                    if (contentSize.get() > 100) {
+                    if (contentSize.get() > 150) {
                         System.out.println();
                         contentSize.set(0);
                     }
@@ -62,7 +70,7 @@ public class AiServiceImpl implements AiService {
         }
 
         Flux<String> flux = this.webClient.post()
-                .uri("streamMultimodal")
+                .uri("/v1/streamMultimodal")
                 .body(Mono.just(neilPromptDTO), NeilPromptDTO.class)
                 .retrieve().bodyToFlux(String.class);
 
@@ -71,7 +79,7 @@ public class AiServiceImpl implements AiService {
         flux.subscribe(
                 content -> {
                     contentSize.getAndAdd(content.length());
-                    if (contentSize.get() > 100) {
+                    if (contentSize.get() > 150) {
                         System.out.println();
                         contentSize.set(0);
                     }

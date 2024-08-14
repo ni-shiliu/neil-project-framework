@@ -1,6 +1,5 @@
 package com.neil.project.ai;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -21,14 +20,13 @@ import reactor.core.publisher.Flux;
         url = "localhost:8093"
 )
 public interface AiFacade {
-    @Operation(summary = "chat")
-    @GetMapping("/chat")
-    String generation(String userInput);
+    @GetMapping("/v1/chat")
+    String chat(@RequestParam("text") String text);
 
-    @GetMapping(value = "/streamChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/v1/streamChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<String> streamChat(@RequestParam("text") String text);
 
-    @PostMapping(value = "/streamMultiModal", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @PostMapping(value = "/v1/streamMultimodal", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<String> streamMultimodal(@RequestBody NeilPromptDTO neilPromptDTO);
 }
 
