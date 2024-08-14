@@ -3,10 +3,8 @@ package com.neil.project.adapter.controller;
 import com.neil.project.service.AiService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author nihao
@@ -22,7 +20,14 @@ public class AiController {
 
 
     @GetMapping(value = "/streamChat")
-    public void streamChat(@RequestParam("prompt") String prompt) {
-        aiService.streamChat(prompt);
+    public void streamChat(@RequestParam("text") String text) {
+        aiService.streamChat(text);
+    }
+
+    @PostMapping(value = "/streamMultimodal")
+    public void streamMultimodal(
+            @RequestParam(value = "image", required = false) MultipartFile image,
+            @RequestParam("text") String text) {
+        aiService.streamMultimodal(image, text);
     }
 }

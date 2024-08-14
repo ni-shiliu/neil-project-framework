@@ -1,13 +1,23 @@
 package com.neil.project.ai.api;
 
+import com.google.common.collect.Lists;
 import com.neil.project.ai.AiFacade;
+import com.neil.project.ai.NeilPromptDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.model.StreamingChatModel;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.model.Media;
+import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.ollama.api.OllamaApi;
+import org.springframework.ai.ollama.api.OllamaOptions;
 import org.springframework.http.MediaType;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -40,10 +50,30 @@ public class ChatController implements AiFacade {
                 .content();
     }
 
+    @Operation(summary = "streamChat")
     @Override
     @GetMapping(value = "/streamChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> streamChat(@RequestParam("prompt") String prompt) {
-        return streamingChatModel.stream(prompt);
+    public Flux<String> streamChat(@RequestParam("text") String text) {
+        return streamingChatModel.stream(text);
+    }
+
+    @Operation(summary = "streamMultimodal")
+    @Override
+    public Flux<String> streamMultimodal(@RequestBody NeilPromptDTO neilPromptDTO) {
+        UserMessage userMessage;
+        if (null == neilPromptDTO.getImage()) {
+            userMessage = new UserMessage(neilPromptDTO.getText());
+        } else {
+            userMessage = new UserMessage(neilPromptDTO.getText(),
+                    Lists.newArrayList(new Media(MimeTypeUtils.IMAGE_PNG, neilPromptDTO.getImage())));
+        }
+        Prompt prompt = new Prompt(userMessage);
+        var ollamaApi = new OllamaApi();
+        var chatModel = new OllamaChatModel(ollamaApi,
+                OllamaOptions.create()
+                        .withModel("llava")
+                        .withTemperature(0.9f));
+        return chatModel.stream(prompt).map(result -> result.getResult().getOutput().getContent());
     }
 
 }

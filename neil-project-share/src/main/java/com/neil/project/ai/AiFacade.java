@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import reactor.core.publisher.Flux;
 
@@ -24,5 +26,9 @@ public interface AiFacade {
     String generation(String userInput);
 
     @GetMapping(value = "/streamChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    Flux<String> streamChat(@RequestParam("prompt") String prompt);
+    Flux<String> streamChat(@RequestParam("text") String text);
+
+    @PostMapping(value = "/streamMultiModal", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    Flux<String> streamMultimodal(@RequestBody NeilPromptDTO neilPromptDTO);
 }
+
