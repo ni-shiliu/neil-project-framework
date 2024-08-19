@@ -27,6 +27,12 @@ neil:
 rocketmq:
   name-server: localhost:9876
 
+knife4j:
+  enable: true
+  basic:
+    enable: true
+    username: neil
+    password: 123123123
 
 
 

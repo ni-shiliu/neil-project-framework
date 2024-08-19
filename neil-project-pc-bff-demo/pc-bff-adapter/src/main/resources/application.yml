@@ -5,3 +5,9 @@ spring:
     name: neil-project-pc-bff
   profiles:
     active: test
+knife4j:
+  enable: true
+  basic:
+    enable: true
+    username: neil
+    password: 123123123
