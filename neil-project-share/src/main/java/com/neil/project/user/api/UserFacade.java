@@ -2,9 +2,11 @@ package com.neil.project.user.api;
 
 import com.neil.myth.annotation.Myth;
 import com.neil.project.user.dto.UserDTO;
+import com.neil.project.user.dto.MobilePasswordLoginDTO;
 import com.neil.project.user.dto.UserSaveDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,4 +33,11 @@ public interface UserFacade {
     @Myth(destination = "MYTH-USER")
     UserDTO registerUser(@RequestBody UserSaveDTO userSaveDTO);
 
+    @Operation(summary = "登陆")
+    @RequestMapping(value = "/v1/user/login", method = RequestMethod.POST)
+    UserDTO login(@RequestBody @Valid MobilePasswordLoginDTO mobilePasswordLoginDTO);
+
+    @Operation(summary = "根据手机号查询用户")
+    @RequestMapping(value = "/v1/user/findByMobile", method = RequestMethod.GET)
+    UserDTO getByMobile(@RequestParam("mobile") String mobile);
 }

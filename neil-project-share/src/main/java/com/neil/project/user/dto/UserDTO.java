@@ -3,6 +3,7 @@ package com.neil.project.user.dto;
 import com.neil.project.common.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * @author nihao
@@ -12,5 +13,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class UserDTO extends BaseDTO {
 
-    private String userName;
+    private String mobile;
+
+    private String username;
 }

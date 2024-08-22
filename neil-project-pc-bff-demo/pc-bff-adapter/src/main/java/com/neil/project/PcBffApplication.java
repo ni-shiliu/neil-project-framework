@@ -11,7 +11,9 @@ import org.springframework.context.annotation.ComponentScan;
  *
  */
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"com.neil.project.order", "com.neil.project.ai"})
+@EnableFeignClients(basePackages = {"com.neil.project.order",
+        "com.neil.project.ai",
+        "com.neil.project.user"})
 @ComponentScan(basePackages = {"com.neil.myth", "com.neil"})
 public class PcBffApplication {
 

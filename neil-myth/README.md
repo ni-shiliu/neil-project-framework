@@ -44,7 +44,7 @@ neil:
     myth-db-config:
       url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
       username: root
-      password: 123456
+      password: 12345678
     ## mongodb
 #    myth-mongo-db-config:
 #      mongo-db-name: neil_myth
@@ -134,7 +134,7 @@ neil:
     myth-db-config:
       url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
       username: root
-      password: 123456
+      password: 12345678
     ## mongodb
 #    myth-mongo-db-config:
 #      mongo-db-name: neil_myth

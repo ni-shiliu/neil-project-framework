@@ -11,3 +11,9 @@ knife4j:
     enable: true
     username: neil
     password: 123123123
+
+
+jwt:
+  key:
+    public: classpath:jwt/public.key
+    private: classpath:jwt/private.key

@@ -40,11 +40,11 @@ public enum ErrorCode implements ErrorNozzle {
 
     PARAM_ILLEGAL("400013", "参数不合法"),
 
+    NEED_LOGIN("400014", "用户未登录"),
+
     SYS_ERROR("500000", "系统错误"),
 
     FILE_MAX_UPLOAD_SIZE_EXCEEDED("500001", "文件上传超过最大限制"),
-
-
 
     ;
 

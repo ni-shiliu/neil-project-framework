@@ -1,5 +1,6 @@
 package com.neil.project.common;
 
+import com.neil.project.exception.ErrorNozzle;
 import lombok.Data;
 import org.apache.logging.log4j.util.Strings;
 
@@ -22,14 +23,14 @@ public class BaseResult<T> implements Serializable {
 
     public static <T> BaseResult<T> success(T value) {
         BaseResult<T> result = new BaseResult<>();
-        result.setCode("0");
+        result.setCode("200");
         result.setResult(value);
         return result;
     }
 
     public static <T> BaseResult<T> success() {
         BaseResult<T> result = new BaseResult<>();
-        result.setCode("0");
+        result.setCode("200");
         return result;
     }
 
@@ -40,8 +41,15 @@ public class BaseResult<T> implements Serializable {
         return result;
     }
 
+    public static <T> BaseResult<T> fail(ErrorNozzle error) {
+        BaseResult<T> result = new BaseResult();
+        result.setCode(error.getErrorMsg());
+        result.setErrorMessage(error.getCode());
+        return result;
+    }
+
     public boolean isSuccess() {
-        return Strings.isNotBlank(code) && "0".equals(code);
+        return Strings.isNotBlank(code) && "200".equals(code);
     }
 
 }
