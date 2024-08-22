@@ -13,11 +13,11 @@ spring:
 
 neil:
   myth:
-    enabled: true
+    enabled: false
     repository-support: mongodb
     mq:
       rocketmq:
-        consumer-enabled: true
+        consumer-enabled: false
         consumer-topic: MYTH-GOODS
         consumer-group: MYTH-GOODS-GROUP
     myth-mongo-db-config:

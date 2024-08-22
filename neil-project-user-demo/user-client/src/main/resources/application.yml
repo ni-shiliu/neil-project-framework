@@ -13,7 +13,7 @@ spring:
 
 neil:
   myth:
-    enabled: true
+    enabled: false
     myth-db-config:
       url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
       username: root
