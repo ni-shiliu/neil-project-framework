@@ -1,5 +1,14 @@
 # neil-project-framework
 
+## 技术栈
+
+- jdk: 17
+- spring-boot: 3.3.2
+- mysql
+- mongodb
+- mq: rocketmq(kafka暂未接入)
+
+
 ## Neil-Myth
 分布式事务解决方案，利用MQ实现事务最终一致性
 
