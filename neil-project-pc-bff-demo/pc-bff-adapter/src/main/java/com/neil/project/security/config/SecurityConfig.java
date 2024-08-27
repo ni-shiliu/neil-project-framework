@@ -1,10 +1,8 @@
 package com.neil.project.security.config;
 
-import com.neil.project.security.JwtAuthenticationFilter;
-import com.neil.project.security.JwtComponent;
-import com.neil.project.security.JwtUserCache;
-import com.neil.project.security.RestAuthenticationEntryPoint;
+import com.neil.project.security.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,6 +32,8 @@ public class SecurityConfig {
 
     private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
+    @Value("${sign.secret:a5a2d17f-e7ff-428e-b8e2-b862107ff1b3}")
+    private String secret;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -56,15 +56,16 @@ public class SecurityConfig {
         );
 
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         http.exceptionHandling(exception -> exception.authenticationEntryPoint(restAuthenticationEntryPoint));
-
         http.csrf(AbstractHttpConfigurer::disable);
 
         userDetailsService.setUserCache(userCache);
         JwtAuthenticationFilter jwtAuthenticationFilter =
                 new JwtAuthenticationFilter(userDetailsService, jwtComponent);
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        SignAuthenticationFilter signAuthenticationFilter = new SignAuthenticationFilter(secret);
+        http.addFilterAfter(signAuthenticationFilter, JwtAuthenticationFilter.class);
         return http.build();
     }
 

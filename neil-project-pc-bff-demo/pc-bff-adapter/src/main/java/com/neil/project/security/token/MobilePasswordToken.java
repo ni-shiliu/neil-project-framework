@@ -1,6 +1,7 @@
 package com.neil.project.security.token;
 
 import com.neil.project.user.dto.MobilePasswordLoginDTO;
+import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 
 import javax.security.auth.Subject;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @author nihao
  * @date 2024/8/21
  */
+@Getter
 public class MobilePasswordToken extends AbstractAuthenticationToken implements Serializable {
 
     @Serial
@@ -40,7 +42,4 @@ public class MobilePasswordToken extends AbstractAuthenticationToken implements 
         return super.implies(subject);
     }
 
-    public MobilePasswordLoginDTO getUserLoginDTO() {
-        return mobilePasswordLoginDTO;
-    }
 }

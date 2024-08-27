@@ -26,7 +26,7 @@ public class MobilePasswordProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         MobilePasswordToken mobilePasswordToken = (MobilePasswordToken) authentication;
-        UserDTO userDTO = userFacade.login(mobilePasswordToken.getUserLoginDTO());
+        UserDTO userDTO = userFacade.login(mobilePasswordToken.getMobilePasswordLoginDTO());
 
         if (Objects.nonNull(userDTO)) {
             JwtUserDetails userDetails = JwtUserDetails.builder()

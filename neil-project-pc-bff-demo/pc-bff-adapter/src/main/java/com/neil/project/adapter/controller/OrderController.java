@@ -25,8 +25,9 @@ public class OrderController {
     private final OrderService orderService;
 
     @Operation(summary = "订单号查询订单")
-    @GetMapping("getByOrderNo")
-    public BaseResult<OrderDTO> getByOrderNo(@RequestParam("orderNo") String orderNo) {
+    @GetMapping("getByOrderNo/{name}/{age}")
+    public BaseResult<OrderDTO> getByOrderNo(@RequestParam("orderNo") String orderNo, @RequestParam("id") String id,
+                                             @PathVariable("name") String name, @PathVariable("age") String age) {
         OrderDTO orderDTO = orderService.getByOrderNo(orderNo);
         return BaseResult.success(orderDTO);
     }
