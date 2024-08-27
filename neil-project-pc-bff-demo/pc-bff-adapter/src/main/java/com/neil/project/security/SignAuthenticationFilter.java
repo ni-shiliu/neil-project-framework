@@ -144,9 +144,9 @@ public class SignAuthenticationFilter extends OncePerRequestFilter {
 
     private String generateSignature(String queryString, Long timeStamp, String nonce) throws NoSuchAlgorithmException, InvalidKeyException {
         if (Strings.isBlank(queryString)) {
-            queryString = "nonce=" + nonce + "&timeStamp=" + timeStamp;
+            queryString = "nonce=" + nonce + "&timestamp=" + timeStamp;
         } else {
-            queryString += "&nonce=" + nonce + "&timeStamp=" + timeStamp;
+            queryString += "&nonce=" + nonce + "&timestamp=" + timeStamp;
         }
         Mac mac = Mac.getInstance(HMAC_ALGORITHM);
         SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), HMAC_ALGORITHM);
