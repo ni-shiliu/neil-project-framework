@@ -65,9 +65,9 @@ public class SignAuthenticationFilter extends OncePerRequestFilter {
         if (Strings.isBlank(sign) || Strings.isBlank(timestampStr) || Strings.isBlank(nonce)) {
             throw new BizException(ErrorCode.MISSING_SERVLET_REQUEST_PARAMETER);
         }
-        Long timeStamp = Long.valueOf(timestampStr);
-        long nowTimeStamp = System.currentTimeMillis();
-        if (nowTimeStamp - timeStamp >= 10000) {
+        Long timestamp = Long.valueOf(timestampStr);
+        long nowTimestamp = System.currentTimeMillis();
+        if (nowTimestamp - timestamp >= 1000000) {
 //             超过10s, 请求失效
             throw new BizException(ErrorCode.REQUEST_EXPIRED);
         }
@@ -81,10 +81,10 @@ public class SignAuthenticationFilter extends OncePerRequestFilter {
                 String queryString = requestWrapper.getQueryString();
                 String decodeQueryString = URLUtil.decode(queryString);
                 String sortedQueryString = processQueryString(decodeQueryString);
-                signature = generateSignature(sortedQueryString, timeStamp, nonce);
+                signature = generateSignature(sortedQueryString, timestamp, nonce);
             } else if (POST.equalsIgnoreCase(method)) {
                 String body = getRequestBody(requestWrapper);
-                signature = generateSignature(body, timeStamp, nonce);
+                signature = generateSignature(body, timestamp, nonce);
             } else if (PUT.equalsIgnoreCase(method)
                     || DELETE.equalsIgnoreCase(method)) {
                 // todo: implement
@@ -142,11 +142,11 @@ public class SignAuthenticationFilter extends OncePerRequestFilter {
                 .collect(Collectors.joining("&"));
     }
 
-    private String generateSignature(String queryString, Long timeStamp, String nonce) throws NoSuchAlgorithmException, InvalidKeyException {
+    private String generateSignature(String queryString, Long timestamp, String nonce) throws NoSuchAlgorithmException, InvalidKeyException {
         if (Strings.isBlank(queryString)) {
-            queryString = "nonce=" + nonce + "&timestamp=" + timeStamp;
+            queryString = "nonce=" + nonce + "&timestamp=" + timestamp;
         } else {
-            queryString += "&nonce=" + nonce + "&timestamp=" + timeStamp;
+            queryString += "&nonce=" + nonce + "&timestamp=" + timestamp;
         }
         Mac mac = Mac.getInstance(HMAC_ALGORITHM);
         SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), HMAC_ALGORITHM);
