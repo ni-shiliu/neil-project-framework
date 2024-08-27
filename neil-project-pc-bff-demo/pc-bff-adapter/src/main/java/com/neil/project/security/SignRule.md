@@ -7,7 +7,7 @@
 
 例：id=我是ID&orderNo=我是订单号&nonce=ee1af86c-7c1e-452d-9b49-c40f6cc7e36b&timestamp=1724744519301
 
-3、用HmacSHA256加签
+- 3、用HmacSHA256加签
 
 ```java
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeyException {
