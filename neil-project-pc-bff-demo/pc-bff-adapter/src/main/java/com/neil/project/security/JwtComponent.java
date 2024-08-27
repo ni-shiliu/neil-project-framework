@@ -28,6 +28,9 @@ public class JwtComponent {
     @Value("${jwt.expiration.seconds:36000}")
     private Long jwtExpirationSeconds;
 
+    @Value("${sign.secret:a5a2d17f-e7ff-428e-b8e2-b862107ff1b3}")
+    private String secret;
+
 
     public String generateToken(Authentication authentication) {
         JwtUserDetails userPrincipal = (JwtUserDetails) authentication.getPrincipal();
@@ -38,6 +41,7 @@ public class JwtComponent {
                 .id(userPrincipal.getUserId().toString())
                 .claim("mobile", userPrincipal.getMobile())
                 .claim("username", userPrincipal.getUsername())
+                .claim("secret", secret)
                 .build();
         return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
