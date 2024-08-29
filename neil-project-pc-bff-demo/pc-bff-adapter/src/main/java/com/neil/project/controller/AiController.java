@@ -1,4 +1,4 @@
-package com.neil.project.adapter.controller;
+package com.neil.project.controller;
 
 import com.neil.project.service.AiService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,4 +1,4 @@
-package com.neil.project.adapter.controller;
+package com.neil.project.controller;
 
 import com.neil.project.common.BaseResult;
 import com.neil.project.order.dto.OrderDTO;

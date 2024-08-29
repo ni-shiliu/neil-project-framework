@@ -53,6 +53,10 @@
 该应用包含一个模块：
 1. pc-adapter：展示层模块，即**MVC**中的Controller，该模块调用微服务中的**client**模块。
 
+实现功能：
+- spring-security: JWT token验证、参数签名验证
+- 配置调用`neil-project-ai-demo` 流式接口
+
 
 ### neil-project-order-demo
 
