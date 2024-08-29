@@ -122,14 +122,17 @@ spring:
 
 ### 检索、增强、生成
 ```java
-    public void saveEmbedData(@RequestParam("text") String text) {
-        List<Document> documents = List.of(
-                new Document(text));
+    public String embedChat(@RequestParam("text") String text) {
+        List<Message> userMessages = Lists.newArrayList(new UserMessage(text));
+        List<Document> documents = vectorStore.similaritySearch(
+                 SearchRequest.query(text).withTopK(4));
         for (Document document : documents) {
-            float[] embed = embeddingModel.embed(document);
-            document.setEmbedding(embed);
+            UserMessage userMessage = new UserMessage(document.getContent());
+            userMessages.add(userMessage);
         }
-        vectorStore.add(documents);
+        Prompt prompt = new Prompt(userMessages);
+        // 需要到改为流式调用
+        return this.chatClient.prompt(prompt).call().content();
     }
 ```
 
