@@ -28,5 +28,11 @@ public interface AiFacade {
 
     @PostMapping(value = "/v1/streamMultimodal", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<String> streamMultimodal(@RequestBody NeilPromptDTO neilPromptDTO);
+
+    @GetMapping(value = "/v1/embedChat")
+    String embedChat(@RequestParam("text") String text);
+
+    @GetMapping(value = "/saveEmbedData")
+    void saveEmbedData(@RequestParam("text") String text);
 }
 

@@ -9,6 +9,15 @@ spring:
     ollama:
       chat:
         model: llama3
+      embedding:
+        model: nomic-embed-text
+    vectorstore:
+      chroma:
+        client:
+          host: http://localhost
+          port: 8000
+        initialize-schema: true
+        collection-name: neil-ai
 
 knife4j:
   enable: true
