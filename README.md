@@ -4,9 +4,9 @@
 
 - jdk: 17
 - spring-boot: 3.3.2
-- mysql
-- mongodb
+- 数据库：mysql、mongodb
 - mq: rocketmq(kafka暂未接入)
+- AI: ollama、llama、nomic-embed-text、llava、chroma(向量数据库)
 
 
 ## Neil-Myth
@@ -44,7 +44,7 @@
 5. 统一api、DTO、枚举管理
 6. ...
 
-### neil-project-pc-bff（Backends For Frontends）
+### neil-project-pc-bff-demo（Backends For Frontends）
 
 **服务于（PC）前端的后端**
 
@@ -54,7 +54,7 @@
 1. pc-adapter：展示层模块，即**MVC**中的Controller，该模块调用微服务中的**client**模块。
 
 
-### neil-project-order
+### neil-project-order-demo
 
 **order服务**
 
@@ -62,6 +62,11 @@
 1. order-client：对外api层
 2. order-app：业务处理层，包含**service**、**schedule**、**message**
 3. order-infra：基础设施层，包含**config**、**mapper**、**gateway**
+
+### neil-project-ai-demo
+
+详情请点击 [NEIL-AI](neil-project-ai-demo%2FREADME.md)
+
 
 
 

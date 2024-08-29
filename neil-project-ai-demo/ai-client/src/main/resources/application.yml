@@ -8,7 +8,7 @@ spring:
   ai:
     ollama:
       chat:
-        model: llama3
+        model: llama3.1
       embedding:
         model: nomic-embed-text
     vectorstore:

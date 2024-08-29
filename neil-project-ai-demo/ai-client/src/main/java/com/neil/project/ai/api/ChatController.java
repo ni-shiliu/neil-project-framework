@@ -5,7 +5,6 @@ import com.neil.project.ai.AiFacade;
 import com.neil.project.ai.NeilPromptDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.Message;
@@ -43,15 +42,16 @@ public class ChatController implements AiFacade {
 
     private final EmbeddingModel embeddingModel;
 
-    @Resource
-    private VectorStore vectorStore;
+    private final VectorStore vectorStore;
 
     public ChatController(ChatClient.Builder chatClientBuilder,
                           StreamingChatModel streamingChatModel,
-                          EmbeddingModel embeddingModel) {
+                          EmbeddingModel embeddingModel,
+                          VectorStore vectorStore) {
         this.chatClient = chatClientBuilder.build();
         this.streamingChatModel = streamingChatModel;
         this.embeddingModel = embeddingModel;
+        this.vectorStore = vectorStore;
     }
 
     @Override
