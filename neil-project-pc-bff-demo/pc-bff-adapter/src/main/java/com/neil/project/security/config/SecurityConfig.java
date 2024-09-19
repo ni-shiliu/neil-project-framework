@@ -50,7 +50,8 @@ public class SecurityConfig {
                 .requestMatchers(
                         // 系统内部无需登陆接口统一配置
                         // 登陆
-                        "/v1/pc/user/login"
+                        "/v1/pc/user/login",
+                        "/v1/pc/redisson/**"
                 ).permitAll()
                 .anyRequest().authenticated()
         );

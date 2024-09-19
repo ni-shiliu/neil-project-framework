@@ -26,6 +26,7 @@
         <druid.version>1.0.29</druid.version>
         <mongo.driver.version>5.0.0</mongo.driver.version>
         <spring.ai.version>1.0.0-SNAPSHOT</spring.ai.version>
+        <redisson-spring-boot-starter.version>3.36.0</redisson-spring-boot-starter.version>
 
     </properties>
 
@@ -126,6 +127,12 @@
                 <version>${spring.ai.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
             </dependency>
 
         </dependencies>

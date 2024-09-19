@@ -17,3 +17,7 @@ jwt:
   key:
     public: classpath:jwt/public.key
     private: classpath:jwt/private.key
+
+redisson:
+  enabled: true
+  address: redis://localhost:6379

@@ -46,6 +46,8 @@ public enum ErrorCode implements ErrorNozzle {
 
     INVALID_SIGN("400016", "签名不正确"),
 
+    INVALID_TOKEN("400017", "token不正确"),
+
     SYS_ERROR("500000", "系统错误"),
 
     FILE_MAX_UPLOAD_SIZE_EXCEEDED("500001", "文件上传超过最大限制")

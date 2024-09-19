@@ -1,16 +1,16 @@
 package com.neil.project.security;
 
+import com.neil.project.exception.BizException;
+import com.neil.project.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.Objects;
 
 /**
  * @author nihao
@@ -51,12 +51,30 @@ public class JwtComponent {
     }
 
     public Long getUserId(String token) {
-        Object userId = jwtDecoder.decode(token).getId();
+        Jwt jwt = this.decode(token);
+        if (Objects.isNull(jwt)) {
+            return null;
+        }
+        Object userId = jwt.getId();
         return userId != null ? Long.valueOf(userId.toString()) : null;
     }
 
     public String getUsername(String token) {
-        return jwtDecoder.decode(token).getClaim("username");
+        Jwt jwt = this.decode(token);
+        if (Objects.isNull(jwt)) {
+            return null;
+        }
+        return jwt.getClaim("username");
+    }
+
+    private Jwt decode(String token) {
+        Jwt jwt;
+        try {
+            jwt = jwtDecoder.decode(token);
+        } catch (Exception e) {
+            throw new BizException(ErrorCode.INVALID_TOKEN);
+        }
+        return jwt;
     }
 
 }

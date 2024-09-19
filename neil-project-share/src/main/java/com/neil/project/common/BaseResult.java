@@ -1,5 +1,6 @@
 package com.neil.project.common;
 
+import com.neil.project.exception.ErrorCode;
 import com.neil.project.exception.ErrorNozzle;
 import lombok.Data;
 import org.apache.logging.log4j.util.Strings;
@@ -43,8 +44,15 @@ public class BaseResult<T> implements Serializable {
 
     public static <T> BaseResult<T> fail(ErrorNozzle error) {
         BaseResult<T> result = new BaseResult();
-        result.setCode(error.getErrorMsg());
-        result.setErrorMessage(error.getCode());
+        result.setCode(error.getCode());
+        result.setErrorMessage(error.getErrorMsg());
+        return result;
+    }
+
+    public static <T> BaseResult<T> fail(String message) {
+        BaseResult<T> result = new BaseResult();
+        result.setCode(ErrorCode.SYS_ERROR.getCode());
+        result.setErrorMessage(message);
         return result;
     }
 
