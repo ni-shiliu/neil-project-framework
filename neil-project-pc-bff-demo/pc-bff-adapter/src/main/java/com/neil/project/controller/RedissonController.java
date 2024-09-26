@@ -4,9 +4,11 @@ import com.neil.project.common.BaseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
-import org.springframework.web.bind.annotation.*;
+import org.redisson.api.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @author nihao
  * @date 2024/9/18
  */
-@Tag(name = "分布式锁 - redisson")
+@Tag(name = "redisson")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/pc/redisson/")
@@ -22,7 +24,41 @@ public class RedissonController {
 
     private final RedissonClient redissonClient;
 
+    private final RRateLimiter rateLimiter;
+
     private static final String LOCK_PREFIX = "REDISSON_KEY_";
+
+    @Operation(summary = "bucket")
+    @GetMapping("bucket")
+    public BaseResult<Void> bucket(@RequestParam("orderNo") String orderNo) {
+        RBucket<Object> rBucket = redissonClient.getBucket("order");
+        rBucket.set(orderNo);
+        Object andSet1 = rBucket.getAndSet(orderNo);
+        rBucket.delete();
+
+        RBucket<Object> expireOrder = redissonClient.getBucket("expire_order1");
+        expireOrder.set("expire_" + orderNo, 5, TimeUnit.SECONDS);
+        Object o = expireOrder.get();
+        return BaseResult.success();
+    }
+
+    @Operation(summary = "atomic")
+    @GetMapping("atomic")
+    public BaseResult<Void> atomic() {
+        RAtomicLong atomic = redissonClient.getAtomicLong("atomic");
+        long a = atomic.incrementAndGet();
+        System.out.println(a);
+        return BaseResult.success();
+    }
+
+    @Operation(summary = "limiter")
+    @GetMapping("limiter")
+    public BaseResult<Void> limiter() {
+        if (!rateLimiter.tryAcquire()) {
+            return BaseResult.fail("请求过于频繁，请稍后后重试。");
+        }
+        return BaseResult.success();
+    }
 
 
     @Operation(summary = "lock")
