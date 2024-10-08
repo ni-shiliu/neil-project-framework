@@ -92,7 +92,7 @@ public class RedissonController {
 //            if (lock.tryLock()) {
             // 尝试获取锁，最多等待5S
 //            if (lock.tryLock(5, TimeUnit.SECONDS)) {
-            // 尝试获取锁，最多等待 5 秒，最长等待 10 秒
+            // 尝试获取锁，最多等待 5 秒，有效时间 10 秒
             if (lock.tryLock(5, 10, TimeUnit.SECONDS)) {
                 // 执行业务
                 System.out.println("lock acquired for orderNo: " + orderNo);
