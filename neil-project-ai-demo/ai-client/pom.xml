@@ -24,5 +24,11 @@
             <groupId>com.neil.project.ai</groupId>
             <artifactId>ai-app</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.neil.project.ai</groupId>
+            <artifactId>ai-app</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

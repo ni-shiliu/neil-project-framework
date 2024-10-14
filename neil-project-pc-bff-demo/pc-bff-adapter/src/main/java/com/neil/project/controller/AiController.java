@@ -20,11 +20,6 @@ public class AiController {
 
     private final AiService aiService;
 
-    @Operation(summary = "同步聊天")
-    @GetMapping(value = "/chat")
-    public String chat(@RequestParam("text") String text) {
-        return aiService.chat(text);
-    }
 
     @Operation(summary = "流式聊天")
     @PostMapping(value = "/streamChat")
@@ -32,11 +27,4 @@ public class AiController {
         aiService.streamChat(aiChatDTO);
     }
 
-    @Operation(summary = "多模态流式聊天")
-    @PostMapping(value = "/streamMultimodal")
-    public void streamMultimodal(
-            @RequestParam(value = "image", required = false) MultipartFile image,
-            @RequestParam("text") String text) {
-        aiService.streamMultimodal(image, text);
-    }
 }
