@@ -5,12 +5,24 @@ spring:
     name: neil-project-ai
   profiles:
     active: test
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/neil?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 12345678
+
+  data:
+    mongodb:
+      uri: mongodb://neil_myth:123456@localhost:27017/neil_myth
+      auto-index-creation: true
+
   ai:
     ollama:
       chat:
         model: llama3.1
       embedding:
         model: nomic-embed-text
+
     vectorstore:
       chroma:
         client:
@@ -25,6 +37,7 @@ knife4j:
     enable: true
     username: neil
     password: 123123123
+
 
 
 

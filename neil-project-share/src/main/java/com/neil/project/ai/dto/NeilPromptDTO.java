@@ -1,4 +1,4 @@
-package com.neil.project.ai;
+package com.neil.project.ai.dto;
 
 import lombok.Data;
 
@@ -20,3 +20,4 @@ public class NeilPromptDTO implements Serializable {
         private String text;
 
 }
+

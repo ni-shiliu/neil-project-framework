@@ -1,5 +1,6 @@
 package com.neil.project.controller;
 
+import com.neil.project.ai.dto.AiChatDTO;
 import com.neil.project.service.AiService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,9 +27,9 @@ public class AiController {
     }
 
     @Operation(summary = "流式聊天")
-    @GetMapping(value = "/streamChat")
-    public void streamChat(@RequestParam("text") String text) {
-        aiService.streamChat(text);
+    @PostMapping(value = "/streamChat")
+    public void streamChat(@RequestBody AiChatDTO aiChatDTO) {
+        aiService.streamChat(aiChatDTO);
     }
 
     @Operation(summary = "多模态流式聊天")

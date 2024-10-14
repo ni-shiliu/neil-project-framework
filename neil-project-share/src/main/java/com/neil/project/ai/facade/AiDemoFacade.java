@@ -1,5 +1,6 @@
-package com.neil.project.ai;
+package com.neil.project.ai.facade;
 
+import com.neil.project.ai.dto.NeilPromptDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -13,26 +14,27 @@ import reactor.core.publisher.Flux;
  * @author nihao
  * @date 2024/7/25
  */
-@Tag(name = "AI服务")
+@Tag(name = "AI-demo")
 @FeignClient(
         name = "neil-project-ai",
-        contextId = "neil-project-ai",
+        contextId = "neil-project-ai-demo",
         url = "localhost:8093"
 )
-public interface AiFacade {
-    @GetMapping("/v1/chat")
+public interface AiDemoFacade {
+
+    @GetMapping("/v1/demo/chat")
     String chat(@RequestParam("text") String text);
 
-    @GetMapping(value = "/v1/streamChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping(value = "/v1/demo/streamChat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<String> streamChat(@RequestParam("text") String text);
 
-    @PostMapping(value = "/v1/streamMultimodal", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @PostMapping(value = "/v1/demo/streamMultimodal", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<String> streamMultimodal(@RequestBody NeilPromptDTO neilPromptDTO);
 
-    @GetMapping(value = "/v1/embedChat")
+    @GetMapping(value = "/v1/demo/embedChat")
     String embedChat(@RequestParam("text") String text);
 
-    @GetMapping(value = "/saveEmbedData")
+    @GetMapping(value = "/v1/demo/saveEmbedData")
     void saveEmbedData(@RequestParam("text") String text);
 }
 

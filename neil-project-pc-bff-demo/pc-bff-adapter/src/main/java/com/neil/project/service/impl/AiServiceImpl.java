@@ -1,11 +1,11 @@
 package com.neil.project.service.impl;
 
-import com.neil.project.ai.AiFacade;
-import com.neil.project.ai.NeilPromptDTO;
+import com.neil.project.ai.dto.AiChatDTO;
+import com.neil.project.ai.facade.AiDemoFacade;
+import com.neil.project.ai.dto.NeilPromptDTO;
 import com.neil.project.service.AiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -27,22 +27,27 @@ public class AiServiceImpl implements AiService {
 
     private final WebClient webClient;
 
-    private final AiFacade aiFacade;
+    private final AiDemoFacade aiDemoFacade;
 
     @Override
     public String chat(String text) {
-        return aiFacade.chat(text);
+        return aiDemoFacade.chat(text);
     }
 
     @Override
-    public void streamChat(String text) {
-        Flux<String> flux = webClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/v1/streamChat")
-                        .queryParam("text", text)
-                        .build())
-                .accept(MediaType.TEXT_EVENT_STREAM)
-                .retrieve()
-                .bodyToFlux(String.class);
+    public void streamChat(AiChatDTO aiChatDTO) {
+//        Flux<String> flux = webClient.post()
+//                .uri("/v1/streamChat")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .accept(MediaType.TEXT_EVENT_STREAM)
+//                .body(Mono.just(aiChatDTO), AiChatDTO.class)
+//                .retrieve()
+//                .bodyToFlux(String.class);
+
+        Flux<String> flux = this.webClient.post()
+                .uri("/v1/streamChat")
+                .body(Mono.just(aiChatDTO), AiChatDTO.class)
+                .retrieve().bodyToFlux(String.class);
 
         AtomicInteger contentSize = new AtomicInteger();
         flux.subscribe(

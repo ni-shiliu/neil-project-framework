@@ -50,7 +50,9 @@ public enum ErrorCode implements ErrorNozzle {
 
     SYS_ERROR("500000", "系统错误"),
 
-    FILE_MAX_UPLOAD_SIZE_EXCEEDED("500001", "文件上传超过最大限制")
+    FILE_MAX_UPLOAD_SIZE_EXCEEDED("500001", "文件上传超过最大限制"),
+
+    AI_CONFIG_ERROR("500002", "AI应用未配置"),
 
 
     ;

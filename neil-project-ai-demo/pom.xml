@@ -15,6 +15,8 @@
   <name>neil-project-ai-demo</name>
   <modules>
     <module>ai-client</module>
+    <module>ai-infrastructure</module>
+    <module>ai-app</module>
   </modules>
 
   <properties>
@@ -31,6 +33,25 @@
       <artifactId>spring-ai-chroma-store-spring-boot-starter</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-sync</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-mongodb</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
 
   </dependencies>
 </project>

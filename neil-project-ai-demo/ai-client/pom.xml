@@ -15,6 +15,14 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>com.neil.project.ai</groupId>
+            <artifactId>ai-app</artifactId>
+        </dependency>
     </dependencies>
 </project>
